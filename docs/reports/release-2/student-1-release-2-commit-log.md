@@ -1,6 +1,6 @@
 # Student 1 Release 2 commit log
 
-Snapshot: 27 October 2026. Scope: the nine Release 2 PRs authored by
+Snapshot: 27 October 2026, 08:42 UTC. Scope: the nine Release 2 PRs authored by
 `aadirai31` and opened between 19 and 23 October. This is a contribution
 log, not the repository's complete history. Dates below are UTC.
 Original commit subjects are copied from Git; they are not rewritten.
@@ -10,17 +10,20 @@ Assistant co-authors remain credited in the linked commits.
 
 ## Contribution and merge status
 
-| PR | Contribution | Status at capture | Main integration commit |
-| --- | --- | --- | --- |
-| [#179](https://github.com/YourNightmareIsOver/TripGenie/pull/179) | Release 2: Azure Container Apps deployment following Lab 11 (scripts + cloud-deployment.yml) | Merged | [`0736601`](https://github.com/YourNightmareIsOver/TripGenie/commit/073660101a8502f0ed564b24497f8138cf5be1bf) |
-| [#180](https://github.com/YourNightmareIsOver/TripGenie/pull/180) | Release 2: make frontends cloud-ready and add the AI-off cloud profile (#167) | Merged | [`e89ec3d`](https://github.com/YourNightmareIsOver/TripGenie/commit/e89ec3d6aba877c2fde9a6557288d2b4b9a8b11b) |
-| [#181](https://github.com/YourNightmareIsOver/TripGenie/pull/181) | Release 2: Student 1 post-commit endpoint tests in student-1-ci.yml (#174) | Merged | [`3ea4195`](https://github.com/YourNightmareIsOver/TripGenie/commit/3ea4195e490e7c4b6a5a3b67cec4302273b1d1e8) |
-| [#182](https://github.com/YourNightmareIsOver/TripGenie/pull/182) | Release 2: Student 1 pre-commit security scan findings and report (#175) | Merged | [`d852c99`](https://github.com/YourNightmareIsOver/TripGenie/commit/d852c9915accd3852666e820e9df84e421497bc0) |
-| [#186](https://github.com/YourNightmareIsOver/TripGenie/pull/186) | Release 2: draft cloud deployment report and architecture (#171) | Open | Not merged |
-| [#187](https://github.com/YourNightmareIsOver/TripGenie/pull/187) | Release 2: cloud deployment prerequisites - registry pull identity with revision gate, canonical OIDC bootstrap, HTTPS behind ingress (#171) | Merged | [`188951a`](https://github.com/YourNightmareIsOver/TripGenie/commit/188951a5010ffedc68508ce5c4933b286441d376) |
-| [#189](https://github.com/YourNightmareIsOver/TripGenie/pull/189) | Student 1: multi-agent "Plan my itinerary" (Release 2, refs #176) | Open | Not merged |
-| [#190](https://github.com/YourNightmareIsOver/TripGenie/pull/190) | Student 1: hide AI panels when configuration switches them off | Merged | [`4ed8621`](https://github.com/YourNightmareIsOver/TripGenie/commit/4ed8621ec288684c0f37fdc6de0486491aa8164b) |
-| [#201](https://github.com/YourNightmareIsOver/TripGenie/pull/201) | Add Student 1 Release 2 demonstration guide (provisional) | Open | Not merged |
+The date below is the latest original commit on each PR at capture time,
+not the PR creation date or the date of its squash merge into `main`.
+
+| PR | Latest PR commit date (UTC) | Contribution | Status at capture | Main integration commit |
+| --- | --- | --- | --- | --- |
+| [#179](https://github.com/YourNightmareIsOver/TripGenie/pull/179) | 2026-10-20 21:12:04 | Release 2: Azure Container Apps deployment following Lab 11 (scripts + cloud-deployment.yml) | Merged | [`0736601`](https://github.com/YourNightmareIsOver/TripGenie/commit/073660101a8502f0ed564b24497f8138cf5be1bf) |
+| [#180](https://github.com/YourNightmareIsOver/TripGenie/pull/180) | 2026-10-19 09:26:51 | Release 2: make frontends cloud-ready and add the AI-off cloud profile (#167) | Merged | [`e89ec3d`](https://github.com/YourNightmareIsOver/TripGenie/commit/e89ec3d6aba877c2fde9a6557288d2b4b9a8b11b) |
+| [#181](https://github.com/YourNightmareIsOver/TripGenie/pull/181) | 2026-10-21 08:30:20 | Release 2: Student 1 post-commit endpoint tests in student-1-ci.yml (#174) | Merged | [`3ea4195`](https://github.com/YourNightmareIsOver/TripGenie/commit/3ea4195e490e7c4b6a5a3b67cec4302273b1d1e8) |
+| [#182](https://github.com/YourNightmareIsOver/TripGenie/pull/182) | 2026-10-20 21:41:20 | Release 2: Student 1 pre-commit security scan findings and report (#175) | Merged | [`d852c99`](https://github.com/YourNightmareIsOver/TripGenie/commit/d852c9915accd3852666e820e9df84e421497bc0) |
+| [#186](https://github.com/YourNightmareIsOver/TripGenie/pull/186) | 2026-10-21 11:23:41 | Release 2: draft cloud deployment report and architecture (#171) | Open | Not merged |
+| [#187](https://github.com/YourNightmareIsOver/TripGenie/pull/187) | 2026-10-21 09:06:09 | Release 2: cloud deployment prerequisites - registry pull identity with revision gate, canonical OIDC bootstrap, HTTPS behind ingress (#171) | Merged | [`188951a`](https://github.com/YourNightmareIsOver/TripGenie/commit/188951a5010ffedc68508ce5c4933b286441d376) |
+| [#189](https://github.com/YourNightmareIsOver/TripGenie/pull/189) | 2026-10-23 01:59:36 | Student 1: multi-agent "Plan my itinerary" (Release 2, refs #176) | Open | Not merged |
+| [#190](https://github.com/YourNightmareIsOver/TripGenie/pull/190) | 2026-10-21 11:12:20 | Student 1: hide AI panels when configuration switches them off | Merged | [`4ed8621`](https://github.com/YourNightmareIsOver/TripGenie/commit/4ed8621ec288684c0f37fdc6de0486491aa8164b) |
+| [#201](https://github.com/YourNightmareIsOver/TripGenie/pull/201) | 2026-10-23 01:59:36 | Add Student 1 Release 2 demonstration guide (provisional) | Open | Not merged |
 
 ## Original commits
 
