@@ -1,0 +1,2 @@
+# Preserve original artifact bytes and checksum validity across platforms.
+* -text

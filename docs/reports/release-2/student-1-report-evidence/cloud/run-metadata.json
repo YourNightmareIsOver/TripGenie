@@ -1,0 +1,1378 @@
+{
+  "databaseId": 39911331439,
+  "name": "Cloud Deployment",
+  "headSha": "4ed8621ec288684c0f37fdc6de0486491aa8164b",
+  "headBranch": "main",
+  "event": "workflow_dispatch",
+  "conclusion": "success",
+  "createdAt": "2026-10-23T06:24:56Z",
+  "updatedAt": "2026-10-23T06:31:49Z",
+  "url": "https://github.com/YourNightmareIsOver/TripGenie/actions/runs/39911331439",
+  "jobs": [
+    {
+      "databaseId": 120274794676,
+      "name": "student-2 / Build and Validate Student 2 Services",
+      "conclusion": "success",
+      "startedAt": "2026-10-23T06:25:00Z",
+      "completedAt": "2026-10-23T06:26:10Z",
+      "url": "https://github.com/YourNightmareIsOver/TripGenie/actions/runs/39911331439/job/120274794676",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Set up Python",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Install dependencies",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Lint",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Run tests",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Build database service image",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Health check database service",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Build backend service image",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Health check backend service",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Check multi-agent is disabled in CI",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Build frontend service image",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Health check frontend service",
+          "conclusion": "success",
+          "number": 13
+        },
+        {
+          "name": "Post Set up Python",
+          "conclusion": "success",
+          "number": 25
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success",
+          "number": 26
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "number": 27
+        }
+      ]
+    },
+    {
+      "databaseId": 120274794786,
+      "name": "student-4 / Build and Validate Student 4 Frontend",
+      "conclusion": "success",
+      "startedAt": "2026-10-23T06:25:00Z",
+      "completedAt": "2026-10-23T06:25:40Z",
+      "url": "https://github.com/YourNightmareIsOver/TripGenie/actions/runs/39911331439/job/120274794786",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Set up Python",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Install frontend and development dependencies",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Validate the installed frontend package",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Compile frontend source and tests",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Lint and check frontend formatting",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Type check frontend",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Run frontend tests",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Build frontend image",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Smoke test degraded frontend health",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Validate Compose configuration",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Post Set up Python",
+          "conclusion": "success",
+          "number": 23
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success",
+          "number": 24
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "number": 25
+        }
+      ]
+    },
+    {
+      "databaseId": 120274794815,
+      "name": "student-4 / Build and Validate Student 4 Database",
+      "conclusion": "success",
+      "startedAt": "2026-10-23T06:25:00Z",
+      "completedAt": "2026-10-23T06:26:03Z",
+      "url": "https://github.com/YourNightmareIsOver/TripGenie/actions/runs/39911331439/job/120274794815",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Set up Python",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Install database and development dependencies",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Validate the installed service packages",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Lint and check formatting",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Type check",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Run database tests",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Build backend image",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Build database image",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Smoke test the database image",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Smoke test the backend image",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Validate Compose configuration",
+          "conclusion": "success",
+          "number": 13
+        },
+        {
+          "name": "Post Set up Python",
+          "conclusion": "success",
+          "number": 25
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success",
+          "number": 26
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "number": 27
+        }
+      ]
+    },
+    {
+      "databaseId": 120274794848,
+      "name": "shared / Build and Validate the Shared Reference Service",
+      "conclusion": "success",
+      "startedAt": "2026-10-23T06:25:00Z",
+      "completedAt": "2026-10-23T06:25:49Z",
+      "url": "https://github.com/YourNightmareIsOver/TripGenie/actions/runs/39911331439/job/120274794848",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Set up Python",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Install dependencies",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Lint",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Run tests",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Build database service image",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Health check database service",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Build backend service image",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Health check backend service",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Post Set up Python",
+          "conclusion": "success",
+          "number": 19
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success",
+          "number": 20
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "number": 21
+        }
+      ]
+    },
+    {
+      "databaseId": 120274794882,
+      "name": "student-4 / Validate Student 4 Compose Integration",
+      "conclusion": "success",
+      "startedAt": "2026-10-23T06:25:00Z",
+      "completedAt": "2026-10-23T06:25:40Z",
+      "url": "https://github.com/YourNightmareIsOver/TripGenie/actions/runs/39911331439/job/120274794882",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Validate the shared Compose configuration",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Bring the Student 4 slice up and wait for readiness",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Check the frontend on its assignment port",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Verify MCP and RAG are disabled",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Verify Smart Planner is disabled",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Compose logs on failure",
+          "conclusion": "skipped",
+          "number": 8
+        },
+        {
+          "name": "Tear down",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success",
+          "number": 18
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "number": 19
+        }
+      ]
+    },
+    {
+      "databaseId": 120274794890,
+      "name": "ai-mode / Build and Validate Shared AI-Mode",
+      "conclusion": "success",
+      "startedAt": "2026-10-23T06:25:00Z",
+      "completedAt": "2026-10-23T06:25:39Z",
+      "url": "https://github.com/YourNightmareIsOver/TripGenie/actions/runs/39911331439/job/120274794890",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Set up Python",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Install shared AI-Mode dependencies",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Validate installed shared AI-Mode package",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Run shared AI-Mode syntax checks",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Run shared AI-Mode Ruff checks",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Run shared AI-Mode pytest suite",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Build shared AI-Mode image",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Apply the shared readiness baseline",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "AI-Mode logs on failure",
+          "conclusion": "skipped",
+          "number": 11
+        },
+        {
+          "name": "Post Set up Python",
+          "conclusion": "success",
+          "number": 21
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success",
+          "number": 22
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "number": 23
+        }
+      ]
+    },
+    {
+      "databaseId": 120274794896,
+      "name": "student-1 / Build and Validate Student 1 Frontend",
+      "conclusion": "success",
+      "startedAt": "2026-10-23T06:25:00Z",
+      "completedAt": "2026-10-23T06:25:34Z",
+      "url": "https://github.com/YourNightmareIsOver/TripGenie/actions/runs/39911331439/job/120274794896",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Set up Python",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Install Student 1 frontend dependencies",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Validate installed Student 1 frontend package",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Run Student 1 frontend syntax checks",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Run Student 1 frontend Ruff checks",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Run Student 1 frontend pytest suite",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Build Student 1 frontend image",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Post Set up Python",
+          "conclusion": "success",
+          "number": 17
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success",
+          "number": 18
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "number": 19
+        }
+      ]
+    },
+    {
+      "databaseId": 120274794911,
+      "name": "student-3 / Validate Student 3 Compose Integration",
+      "conclusion": "success",
+      "startedAt": "2026-10-23T06:25:00Z",
+      "completedAt": "2026-10-23T06:25:56Z",
+      "url": "https://github.com/YourNightmareIsOver/TripGenie/actions/runs/39911331439/job/120274794911",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Validate the shared Compose configuration",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Bring the Student 3 slice up and wait for health",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Check the frontend answers on its published port",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Check the shared home page links that same port",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Verify MCP, RAG and multi-agent are disabled",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Set up Python",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Install Student 3 endpoint test dependencies",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Post-commit endpoint tests",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Endpoint test summary",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Upload endpoint test evidence",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Compose logs on failure",
+          "conclusion": "skipped",
+          "number": 13
+        },
+        {
+          "name": "Tear down",
+          "conclusion": "success",
+          "number": 14
+        },
+        {
+          "name": "Post Set up Python",
+          "conclusion": "success",
+          "number": 27
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success",
+          "number": 28
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "number": 29
+        }
+      ]
+    },
+    {
+      "databaseId": 120274794928,
+      "name": "student-1 / Build and Validate Student 1 Backend",
+      "conclusion": "success",
+      "startedAt": "2026-10-23T06:25:00Z",
+      "completedAt": "2026-10-23T06:26:07Z",
+      "url": "https://github.com/YourNightmareIsOver/TripGenie/actions/runs/39911331439/job/120274794928",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Set up Python",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Install Student 1 backend dependencies",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Validate installed Student 1 packages",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Run Student 1 backend syntax checks",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Run Student 1 backend Ruff checks",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Run Student 1 backend pytest suite",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Build Student 1 backend image",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Post Set up Python",
+          "conclusion": "success",
+          "number": 17
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success",
+          "number": 18
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "number": 19
+        }
+      ]
+    },
+    {
+      "databaseId": 120274794975,
+      "name": "student-1 / Validate Student 1 Compose Readiness",
+      "conclusion": "success",
+      "startedAt": "2026-10-23T06:25:00Z",
+      "completedAt": "2026-10-23T06:25:52Z",
+      "url": "https://github.com/YourNightmareIsOver/TripGenie/actions/runs/39911331439/job/120274794975",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Validate the shared Compose configuration",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Reject host-only AI services in Compose",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Start the Student 1 slice",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Apply the shared readiness baseline",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Verify MCP and RAG are disabled",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Set up Python",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Install Student 1 endpoint test dependencies",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Post-commit endpoint tests",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Endpoint test summary",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Upload endpoint test evidence",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Compose logs on failure",
+          "conclusion": "skipped",
+          "number": 13
+        },
+        {
+          "name": "Tear down",
+          "conclusion": "success",
+          "number": 14
+        },
+        {
+          "name": "Post Set up Python",
+          "conclusion": "success",
+          "number": 27
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success",
+          "number": 28
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "number": 29
+        }
+      ]
+    },
+    {
+      "databaseId": 120274795032,
+      "name": "student-1 / Build and Validate Student 1 Database",
+      "conclusion": "success",
+      "startedAt": "2026-10-23T06:25:00Z",
+      "completedAt": "2026-10-23T06:25:28Z",
+      "url": "https://github.com/YourNightmareIsOver/TripGenie/actions/runs/39911331439/job/120274795032",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Set up Python",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Install Student 1 database dependencies",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Validate installed Student 1 packages",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Run Student 1 database syntax checks",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Run Student 1 database Ruff checks",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Run Student 1 database pytest suite",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Build Student 1 database image",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Post Set up Python",
+          "conclusion": "success",
+          "number": 17
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success",
+          "number": 18
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "number": 19
+        }
+      ]
+    },
+    {
+      "databaseId": 120274795055,
+      "name": "student-1 / Validate Shared RAG Server",
+      "conclusion": "success",
+      "startedAt": "2026-10-23T06:25:00Z",
+      "completedAt": "2026-10-23T06:25:18Z",
+      "url": "https://github.com/YourNightmareIsOver/TripGenie/actions/runs/39911331439/job/120274795055",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Set up Python",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Install RAG server dependencies",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Run RAG server syntax checks",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Run RAG server Ruff checks",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Run RAG server pytest suite",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Post Set up Python",
+          "conclusion": "success",
+          "number": 13
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success",
+          "number": 14
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "number": 15
+        }
+      ]
+    },
+    {
+      "databaseId": 120274795068,
+      "name": "student-5 / Build and Validate Student 5",
+      "conclusion": "success",
+      "startedAt": "2026-10-23T06:25:00Z",
+      "completedAt": "2026-10-23T06:26:16Z",
+      "url": "https://github.com/YourNightmareIsOver/TripGenie/actions/runs/39911331439/job/120274795068",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Set up Python",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Install Student 5 dependencies",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Validate installed packages",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Run syntax checks",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Run Ruff checks",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Run tests",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Build Student 5 images",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Validate the shared Compose configuration",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Smoke test the Student 5 slice",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Check the Student 5 frontend",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Verify MCP, RAG and multi-agent are disabled",
+          "conclusion": "success",
+          "number": 13
+        },
+        {
+          "name": "Post-commit endpoint tests",
+          "conclusion": "success",
+          "number": 14
+        },
+        {
+          "name": "Endpoint test summary",
+          "conclusion": "success",
+          "number": 15
+        },
+        {
+          "name": "Upload endpoint test evidence",
+          "conclusion": "success",
+          "number": 16
+        },
+        {
+          "name": "Compose logs on failure",
+          "conclusion": "skipped",
+          "number": 17
+        },
+        {
+          "name": "Tear down",
+          "conclusion": "success",
+          "number": 18
+        },
+        {
+          "name": "Post Set up Python",
+          "conclusion": "success",
+          "number": 35
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success",
+          "number": 36
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "number": 37
+        }
+      ]
+    },
+    {
+      "databaseId": 120274795100,
+      "name": "student-3 / Build and Validate Student 3 Frontend",
+      "conclusion": "success",
+      "startedAt": "2026-10-23T06:25:00Z",
+      "completedAt": "2026-10-23T06:25:53Z",
+      "url": "https://github.com/YourNightmareIsOver/TripGenie/actions/runs/39911331439/job/120274795100",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Set up Python",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Install Student 3 frontend dependencies",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Validate installed Student 3 packages",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Run Student 3 frontend syntax checks",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Run Student 3 frontend Ruff checks",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Run Student 3 frontend pytest suite",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Build Student 3 frontend image",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Post Set up Python",
+          "conclusion": "success",
+          "number": 17
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success",
+          "number": 18
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "number": 19
+        }
+      ]
+    },
+    {
+      "databaseId": 120274795128,
+      "name": "student-3 / Build and Validate Student 3 Backend",
+      "conclusion": "success",
+      "startedAt": "2026-10-23T06:25:00Z",
+      "completedAt": "2026-10-23T06:25:46Z",
+      "url": "https://github.com/YourNightmareIsOver/TripGenie/actions/runs/39911331439/job/120274795128",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Set up Python",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Install Student 3 backend dependencies",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Validate installed Student 3 packages",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Run Student 3 backend syntax checks",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Run Student 3 backend Ruff checks",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Run Student 3 backend pytest suite",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Build Student 3 backend image",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Post Set up Python",
+          "conclusion": "success",
+          "number": 17
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success",
+          "number": 18
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "number": 19
+        }
+      ]
+    },
+    {
+      "databaseId": 120274795221,
+      "name": "student-3 / Build and Validate Student 3 Database",
+      "conclusion": "success",
+      "startedAt": "2026-10-23T06:25:00Z",
+      "completedAt": "2026-10-23T06:25:36Z",
+      "url": "https://github.com/YourNightmareIsOver/TripGenie/actions/runs/39911331439/job/120274795221",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Set up Python",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Install Student 3 database dependencies",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Validate installed Student 3 packages",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Run Student 3 database syntax checks",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Run Student 3 database Ruff checks",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Run Student 3 database pytest suite",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Build Student 3 database image",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Post Set up Python",
+          "conclusion": "success",
+          "number": 17
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success",
+          "number": 18
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "number": 19
+        }
+      ]
+    },
+    {
+      "databaseId": 120275210460,
+      "name": "deploy_azure",
+      "conclusion": "success",
+      "startedAt": "2026-10-23T06:26:19Z",
+      "completedAt": "2026-10-23T06:31:48Z",
+      "url": "https://github.com/YourNightmareIsOver/TripGenie/actions/runs/39911331439/job/120275210460",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Azure login",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Set up deployment environment",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Build and push images",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Azure login (refresh)",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Create Container Apps environment",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Azure login (refresh again)",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Deploy to Azure Container Apps",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Validate deployment and generate evidence",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Publish deployment results",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Upload deployment evidence",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Post Azure login (refresh again)",
+          "conclusion": "success",
+          "number": 21
+        },
+        {
+          "name": "Post Azure login (refresh)",
+          "conclusion": "success",
+          "number": 22
+        },
+        {
+          "name": "Post Azure login",
+          "conclusion": "success",
+          "number": 23
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success",
+          "number": 24
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "number": 25
+        }
+      ]
+    }
+  ]
+}

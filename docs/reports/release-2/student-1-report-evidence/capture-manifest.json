@@ -1,0 +1,75 @@
+{
+  "captured_at_utc": "2026-10-27T08:42:26.537249+00:00",
+  "ci_run": "https://github.com/YourNightmareIsOver/TripGenie/actions/runs/39887108168",
+  "ci_sha": "29239a10763950c8beeea6a80d0c4b327c0ce784",
+  "cloud_run": "https://github.com/YourNightmareIsOver/TripGenie/actions/runs/39911331439",
+  "cloud_sha": "4ed8621ec288684c0f37fdc6de0486491aa8164b",
+  "screenshots": {
+    "ci-run.png": "Unmodified viewport screenshot of the real public GitHub Actions run page.",
+    "cloud-run.png": "Unmodified viewport screenshot of the real public GitHub Actions run page.",
+    "ci-endpoint-report.png": "Complete original artifact rendered locally with provenance header.",
+    "cloud-deployment-report.png": "Complete original artifact rendered locally with provenance header."
+  },
+  "files": [
+    {
+      "path": "ci\\run-metadata.json",
+      "sha256": "b6ba4fa7bb13519128f500c090ab6279fb51d7209eb974de15f572440439a152",
+      "bytes": 10080
+    },
+    {
+      "path": "ci\\student-1-endpoint-tests.md",
+      "sha256": "cf0397afb75745b9b4ae078615d8421b962b5673974d26bae863cf40fe838495",
+      "bytes": 475
+    },
+    {
+      "path": "ci\\student-1-endpoint-tests.xml",
+      "sha256": "70606982d2312e27947c5800b3008d568ea372782eb5020d242db429a4a3e784",
+      "bytes": 1162
+    },
+    {
+      "path": "cloud\\cloud-deployment-results.md",
+      "sha256": "3b5c53a1c25feb16c33be8c17de7a1adebbc1c5a91c52416a55dcd0c6d0ea6ab",
+      "bytes": 5588
+    },
+    {
+      "path": "cloud\\run-metadata.json",
+      "sha256": "6b347cec94974d49f13f611b4759c453beb28f3db6647e1fe0d1e8a38c9fc965",
+      "bytes": 36395
+    },
+    {
+      "path": "cloud-student-1-ci\\student-1-endpoint-tests.md",
+      "sha256": "cf0397afb75745b9b4ae078615d8421b962b5673974d26bae863cf40fe838495",
+      "bytes": 475
+    },
+    {
+      "path": "cloud-student-1-ci\\student-1-endpoint-tests.xml",
+      "sha256": "e6b1ad9a50053340b993536dab8935b561fc9e9a77988eddcc2e7d5dec7abfa1",
+      "bytes": 1162
+    },
+    {
+      "path": "commit-provenance.json",
+      "sha256": "3b70f615f19ce3b966690b8c7b66bb34142293ebc72456b4c583ae9afd28b3e5",
+      "bytes": 17204
+    },
+    {
+      "path": "screenshots\\ci-endpoint-report.png",
+      "sha256": "8e44d556a959a2f915a7519732253ae472dec2be1dcea952beb2e1c0b0995947",
+      "bytes": 159853
+    },
+    {
+      "path": "screenshots\\ci-run.png",
+      "sha256": "25701fdd05428c0ad01069463f42523315fb8624df000571cb1b18f143234ec6",
+      "bytes": 202473
+    },
+    {
+      "path": "screenshots\\cloud-deployment-report.png",
+      "sha256": "5a96bb7851df31b50f6b0b72dcfd24f7a346105002c9ea7815b7373bf0a56729",
+      "bytes": 831767
+    },
+    {
+      "path": "screenshots\\cloud-run.png",
+      "sha256": "209bca7e1d56472446386a2960c19716e5eda6e8effe0c214c8f81c878990eb4",
+      "bytes": 181920
+    }
+  ]
+}
