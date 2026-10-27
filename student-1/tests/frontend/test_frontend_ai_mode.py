@@ -46,6 +46,25 @@ def test_ai_form_submission_via_htmx_returns_draft_results_without_persisting(
     assert set(backend_api.items) == starting_item_ids
 
 
+def test_ai_htmx_response_replaces_the_element_the_form_targets(
+    client,
+    backend_api,
+) -> None:
+    page = client.get("/trips/trip_2027_sydney_getaway").text
+    target = re.search(r'hx-post="[^"]*/ai-suggestions"\s+hx-target="#([\w-]+)"', page)
+
+    response = client.post(
+        "/trips/trip_2027_sydney_getaway/ai-suggestions",
+        data={"requested_date": "2027-04-02", "goal": "A slow morning"},
+        headers=HTMX_HEADERS,
+    )
+
+    # An outerHTML swap must get back the element it targets, or the whole
+    # shell is nested inside the trip panel.
+    assert target is not None
+    assert re.match(rf'\s*<\w+\s+id="{target[1]}"', response.text)
+
+
 def test_ai_empty_state_renders_without_breaking_trip_page(client, backend_api) -> None:
     backend_api.ai_responses.append(
         data_response(
@@ -308,6 +327,35 @@ def test_ai_mode_absence_error_does_not_break_normal_trip_pages(
     assert "Sydney Getaway" in detail_response.text
     assert edit_response.status_code == 200
     assert 'value="Sydney Getaway"' in edit_response.text
+
+
+def test_ai_post_once_ai_mode_is_disabled_shows_why_without_the_form(
+    client,
+    backend_api,
+) -> None:
+    # A page loaded before AI-Mode was switched off still posts here; the
+    # backend refuses and the trip page explains why but offers no AI form.
+    backend_api.ai_features["ai_suggestions"] = False
+    backend_api.ai_responses.append(
+        error_response(
+            503,
+            "DEPENDENCY_UNAVAILABLE",
+            "AI suggestions are unavailable because the shared AI-Mode service "
+            "is not configured.",
+        ),
+    )
+
+    response = client.post(
+        "/trips/trip_2027_sydney_getaway/ai-suggestions",
+        data={"requested_date": "2027-04-02", "goal": "Plan a gentle afternoon."},
+        headers=HTMX_HEADERS,
+    )
+
+    assert response.status_code == 503
+    assert "shared AI-Mode service is not configured." in response.text
+    assert '<h3 id="ai-detail-heading" data-autofocus>' in response.text
+    assert "/ai-suggestions" not in response.text
+    assert "Harbour Walk" in response.text
 
 
 AI_REVIEW_NOTICE_SNIPPET = "You are reviewing an AI-generated draft."

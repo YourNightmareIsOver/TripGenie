@@ -1,0 +1,72 @@
+{
+  "mode": "cloud",
+  "generated_at": "2026-10-26T12:08:53Z",
+  "human_decision": "Accept. Release decision: READY",
+  "failed": [],
+  "checks": [
+    {
+      "check": "Deployment report / report source",
+      "outcome": "OK: run 39911331439 artifact"
+    },
+    {
+      "check": "Deployment report / deployment status",
+      "outcome": "OK: Success"
+    },
+    {
+      "check": "Deployment report / frontend URLs reported",
+      "outcome": "OK: 6 URL(s)"
+    },
+    {
+      "check": "Deployment report / smoke tests",
+      "outcome": "OK: 41 of 41 passed"
+    },
+    {
+      "check": "Deployment report / security configuration",
+      "outcome": "OK: 6 of 6 passed"
+    },
+    {
+      "check": "Deployment report / AI services not deployed",
+      "outcome": "OK: report states the AI services are not deployed"
+    },
+    {
+      "check": "Configuration and release gate / file scripts/deploy/azure/deploy-azure.sh",
+      "outcome": "OK: present"
+    },
+    {
+      "check": "Configuration and release gate / file scripts/deploy/azure/deployment-testing.sh",
+      "outcome": "OK: present"
+    },
+    {
+      "check": "Configuration and release gate / file scripts/deploy/azure/smoke_test.py",
+      "outcome": "OK: present"
+    },
+    {
+      "check": "Configuration and release gate / file scripts/deploy/azure/security_check.py",
+      "outcome": "OK: present"
+    },
+    {
+      "check": "Configuration and release gate / file .github/workflows/cloud-deployment.yml",
+      "outcome": "OK: present"
+    },
+    {
+      "check": "Configuration and release gate / file shared/configuration/.env.cloud",
+      "outcome": "OK: present"
+    },
+    {
+      "check": "Configuration and release gate / images pulled with a managed identity",
+      "outcome": "OK: deploy-azure.sh uses --registry-identity"
+    },
+    {
+      "check": "Configuration and release gate / human release gate (production environment)",
+      "outcome": "OK: deploy job runs in `environment: production`"
+    },
+    {
+      "check": "Configuration and release gate / cloud profile turns AI features off",
+      "outcome": "OK: every *_ENABLED is false, AI URLs blank"
+    },
+    {
+      "check": "Configuration and release gate / cloud-deployment.yml latest run",
+      "outcome": "OK: success, run 39911331439 at 4ed8621 on main"
+    }
+  ]
+}

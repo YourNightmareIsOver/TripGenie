@@ -1,9 +1,10 @@
 from __future__ import annotations
 
 import json
+import logging
 import re
 from contextlib import asynccontextmanager
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from datetime import date, time
 from pathlib import Path
 from typing import TYPE_CHECKING, cast
@@ -19,6 +20,8 @@ from .client import BackendApiClient
 from .config import Settings
 from .errors import ApiError, validation_error
 from .models import (
+    MULTI_AGENT_RUN_ID_PATTERN,
+    AiFeatures,
     AiSuggestionDraft,
     AiSuggestionReviewPayload,
     AiSuggestionsResponse,
@@ -29,6 +32,7 @@ from .models import (
     ItineraryCategory,
     ItineraryItemRecord,
     McpOptionsResponse,
+    MultiAgentPlanResponse,
     RagQueryResponse,
     TripDay,
     TripDetail,
@@ -40,6 +44,7 @@ if TYPE_CHECKING:
     from collections.abc import AsyncIterator
 
     import httpx
+    from starlette.datastructures import FormData
 
 PACKAGE_ROOT = Path(__file__).resolve().parent
 TEMPLATES = Jinja2Templates(directory=str(PACKAGE_ROOT / "templates"))
@@ -85,6 +90,21 @@ ITEM_FORM_DEFAULT_DATE_MESSAGE = (
 ISO_DATE_PATTERN = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 ISO_TIME_PATTERN = re.compile(r"^\d{2}:\d{2}$")
 MCP_SUMMARY_FIELDS = ("name", "destination", "start_date", "end_date")
+PLAN_ITEM_FIELDS = (
+    "date",
+    "start_time",
+    "end_time",
+    "title",
+    "location",
+    "description",
+    "category",
+    "source_id",
+)
+PLAN_ITEM_INPUT = re.compile(rf"^item-(\d{{1,2}})-({'|'.join(PLAN_ITEM_FIELDS)})$")
+# Backend detail fields that point at one drafted item, e.g. `items.2`.
+PLAN_ITEM_DETAIL = re.compile(r"^(items|accepted_items|corrected_items)\.(\d+)(.*)$")
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass(slots=True)
@@ -188,8 +208,108 @@ def mcp_panel_context(
     }
 
 
+def multi_agent_panel_context(
+    *,
+    run: MultiAgentPlanResponse | None = None,
+    error: ApiError | None = None,
+    run_id: str | None = None,
+    request_text: str = "",
+    form: dict[str, object] | None = None,
+) -> dict[str, object]:
+    return {
+        "ma_run": run,
+        "ma_run_id": run.run_id if run else run_id,
+        "ma_error": error,
+        "ma_errors_by_field": error_details_by_field(error),
+        "ma_request": request_text,
+        # What the traveller submitted, so a refused decision keeps their edits.
+        "ma_form": form,
+    }
+
+
+def check_multi_agent_run_id(run_id: str) -> None:
+    if not re.fullmatch(MULTI_AGENT_RUN_ID_PATTERN, run_id):
+        raise validation_error(
+            "The plan reference is not valid.",
+            [{"field": "run_id", "issue": "must be a multi-agent run id"}],
+        )
+
+
+def multi_agent_review_from_form(
+    form: FormData,
+) -> tuple[dict[str, object], dict[str, object]]:
+    """The backend review request, and the submitted form to show again."""
+    raw_selected = [str(value) for value in form.getlist("selected")]
+    if not all(value.isdigit() and len(value) <= 2 for value in raw_selected):
+        raise validation_error(
+            "The selected items are not valid.",
+            [{"field": "selected", "issue": "must be drafted item numbers"}],
+        )
+    selected = sorted({int(value) for value in raw_selected})
+    items: dict[int, dict[str, str]] = {}
+    for key, value in form.multi_items():
+        match = PLAN_ITEM_INPUT.match(key)
+        if match:
+            items.setdefault(int(match[1]), {})[match[2]] = str(value)
+    decision = str(form.get("decision", ""))
+    notes = str(form.get("notes", ""))
+
+    payload: dict[str, object] = {"decision": decision}
+    if note := normalise_optional_text(notes):
+        payload["notes"] = note
+    # Empty lists are left out so the backend's own "select at least one" rule
+    # applies, and a retry of a recorded decision sends just the decision.
+    if decision == "partial" and selected:
+        payload["accepted_items"] = selected
+    if decision == "correct" and selected:
+        payload["corrected_items"] = [
+            {
+                field: value
+                for field in PLAN_ITEM_FIELDS
+                if (value := normalise_optional_text(items.get(index, {}).get(field)))
+                is not None
+            }
+            for index in selected
+        ]
+    return payload, {"selected": selected, "items": items, "notes": notes}
+
+
+def label_plan_error(error: ApiError, selected: list[int]) -> ApiError:
+    """Names backend details such as `corrected_items.1.title` by the item
+    number the traveller sees (a correction lists only the selected items)."""
+    details = []
+    for detail in error.details:
+        field = detail.get("field", "")
+        match = PLAN_ITEM_DETAIL.match(field)
+        if match:
+            index = int(match[2])
+            if match[1] == "corrected_items":
+                index = selected[index] if index < len(selected) else -1
+            if index >= 0:
+                field = f"Item {index + 1}{match[3].replace('.', ' ')}"
+        details.append({**detail, "field": field})
+    return replace(error, details=details)
+
+
 def get_backend_client(request: Request) -> BackendApiClient:
     return cast(BackendApiClient, request.app.state.backend_client)
+
+
+async def load_ai_features(request: Request) -> AiFeatures | None:
+    """The AI panels the backend's configuration switches on; None if unknown.
+
+    Unknown is not "disabled": the pages keep every AI panel, say so, and let
+    the backend's own guards answer, so a blip never hides AI mode.
+    """
+    try:
+        return await get_backend_client(request).ai_features()
+    except ApiError as exc:
+        logger.warning(
+            "ai_features unavailable status=%s code=%s; showing every AI panel",
+            exc.status_code,
+            exc.code,
+        )
+        return None
 
 
 def envelope(payload: object) -> dict[str, object]:
@@ -732,7 +852,7 @@ def render_screen(
     return response
 
 
-def render_home_screen(
+async def render_home_screen(
     request: Request,
     *,
     trips: list[TripRecord],
@@ -750,6 +870,7 @@ def render_home_screen(
         status_code=status_code,
         push_url=push_url,
         page_error=None,
+        ai_features=await load_ai_features(request),
     )
 
 
@@ -891,7 +1012,7 @@ def render_confirmation_screen(
     )
 
 
-def render_trip_detail_screen(
+async def render_trip_detail_screen(
     request: Request,
     *,
     trip: TripDetail,
@@ -944,7 +1065,13 @@ def render_trip_detail_screen(
         ai_error=ai_error,
         ai_errors_by_field=error_details_by_field(ai_error),
         ai_result=ai_result,
-        **{**rag_panel_context(), **mcp_panel_context(), **(panel_context or {})},
+        ai_features=await load_ai_features(request),
+        **{
+            **rag_panel_context(),
+            **mcp_panel_context(),
+            **multi_agent_panel_context(),
+            **(panel_context or {}),
+        },
         # Browser-facing, so a row can link out to student 2's own page.
         accommodation_ui_url=request.app.state.settings.accommodation_ui_url,
     )
@@ -964,7 +1091,12 @@ async def render_feature_panel(
         return TEMPLATES.TemplateResponse(
             request,
             template,
-            {"trip_id": trip_id, **context},
+            {
+                "trip_id": trip_id,
+                "itinerary_category_options": ITINERARY_CATEGORY_OPTIONS,
+                "ai_features": await load_ai_features(request),
+                **context,
+            },
             status_code=status_code,
         )
 
@@ -983,7 +1115,7 @@ async def render_feature_panel(
             retry_url=path_for(request, "view_trip", trip_id=trip_id),
             fallback_url=path_for(request, "dashboard"),
         )
-    return render_trip_detail_screen(
+    return await render_trip_detail_screen(
         request,
         trip=trip,
         trips=trips,
@@ -1168,7 +1300,7 @@ def create_app(
             )
 
         if not trips:
-            return render_home_screen(
+            return await render_home_screen(
                 request,
                 trips=trips,
                 trip_list_error=None,
@@ -1189,7 +1321,7 @@ def create_app(
                 fallback_url=path_for(request, "dashboard"),
             )
 
-        return render_trip_detail_screen(
+        return await render_trip_detail_screen(
             request,
             trip=trip,
             trips=trips,
@@ -1270,7 +1402,7 @@ def create_app(
             return RedirectResponse(destination_url, status_code=303)
 
         trips, trip_list_error = await safe_list_trips(client)
-        return render_trip_detail_screen(
+        return await render_trip_detail_screen(
             request,
             trip=trip,
             trips=trips,
@@ -1303,7 +1435,7 @@ def create_app(
                 fallback_url=path_for(request, "dashboard"),
             )
 
-        return render_trip_detail_screen(
+        return await render_trip_detail_screen(
             request,
             trip=trip,
             trips=trips,
@@ -1343,7 +1475,7 @@ def create_app(
                 fallback_url=path_for(request, "view_trip", trip_id=trip_id),
             )
 
-        return render_trip_detail_screen(
+        return await render_trip_detail_screen(
             request,
             trip=trip,
             trips=trips,
@@ -1402,7 +1534,7 @@ def create_app(
                     fallback_url=path_for(request, "dashboard"),
                 )
 
-            return render_trip_detail_screen(
+            return await render_trip_detail_screen(
                 request,
                 trip=trip,
                 trips=trips,
@@ -1441,7 +1573,7 @@ def create_app(
                 fallback_url=path_for(request, "dashboard"),
             )
 
-        return render_trip_detail_screen(
+        return await render_trip_detail_screen(
             request,
             trip=trip,
             trips=trips,
@@ -1518,6 +1650,107 @@ def create_app(
             client,
             trip_id=trip_id,
             template="partials/mcp_panel.html",
+            context=context,
+            status_code=status_code,
+        )
+
+    @app.post("/trips/{trip_id}/multi-agent-plan", name="start_multi_agent_plan")
+    async def start_multi_agent_plan(
+        trip_id: str,
+        request: Request,
+        client: BackendApiClient = Depends(get_backend_client),
+    ) -> Response:
+        values = await read_form_values(request, ("request",))
+        try:
+            run = await client.start_multi_agent_plan(
+                trip_id, normalise_optional_text(values["request"])
+            )
+        except ApiError as exc:
+            context = multi_agent_panel_context(
+                error=exc, request_text=values["request"]
+            )
+            status_code = exc.status_code
+        else:
+            context = multi_agent_panel_context(run=run, request_text=values["request"])
+            status_code = 200
+        return await render_feature_panel(
+            request,
+            client,
+            trip_id=trip_id,
+            template="partials/multi_agent_panel.html",
+            context=context,
+            status_code=status_code,
+        )
+
+    # HTMX polls this while the agents work; without JavaScript the panel's
+    # "Refresh status" link loads it as a whole page.
+    @app.get(
+        "/trips/{trip_id}/multi-agent-plan/{run_id}",
+        name="view_multi_agent_plan",
+    )
+    async def view_multi_agent_plan(
+        trip_id: str,
+        run_id: str,
+        request: Request,
+        client: BackendApiClient = Depends(get_backend_client),
+    ) -> Response:
+        try:
+            check_multi_agent_run_id(run_id)
+            run = await client.get_multi_agent_plan(trip_id, run_id)
+        except ApiError as exc:
+            context = multi_agent_panel_context(error=exc, run_id=run_id)
+            status_code = exc.status_code
+        else:
+            context = multi_agent_panel_context(run=run)
+            status_code = 200
+        return await render_feature_panel(
+            request,
+            client,
+            trip_id=trip_id,
+            template="partials/multi_agent_panel.html",
+            context=context,
+            status_code=status_code,
+        )
+
+    @app.post(
+        "/trips/{trip_id}/multi-agent-plan/{run_id}/review",
+        name="review_multi_agent_plan",
+    )
+    async def review_multi_agent_plan(
+        trip_id: str,
+        run_id: str,
+        request: Request,
+        client: BackendApiClient = Depends(get_backend_client),
+    ) -> Response:
+        form_state: dict[str, object] | None = None
+        selected: list[int] = []
+        try:
+            check_multi_agent_run_id(run_id)
+            payload, form_state = multi_agent_review_from_form(await request.form())
+            selected = cast(list[int], form_state["selected"])
+            run = await client.review_multi_agent_plan(trip_id, run_id, payload)
+        except ApiError as exc:
+            error = label_plan_error(exc, selected)
+            current: MultiAgentPlanResponse | None = None
+            # A refused decision (422/409) leaves the plan as it was: show it
+            # again with the error so the traveller can fix and resubmit.
+            if exc.status_code in {409, 422} and form_state is not None:
+                try:
+                    current = await client.get_multi_agent_plan(trip_id, run_id)
+                except ApiError:
+                    current = None
+            context = multi_agent_panel_context(
+                run=current, error=error, run_id=run_id, form=form_state
+            )
+            status_code = exc.status_code
+        else:
+            context = multi_agent_panel_context(run=run)
+            status_code = 200
+        return await render_feature_panel(
+            request,
+            client,
+            trip_id=trip_id,
+            template="partials/multi_agent_panel.html",
             context=context,
             status_code=status_code,
         )
@@ -1601,7 +1834,7 @@ def create_app(
             return RedirectResponse(destination_url, status_code=303)
 
         trips, trip_list_error = await safe_list_trips(client)
-        return render_trip_detail_screen(
+        return await render_trip_detail_screen(
             request,
             trip=trip,
             trips=trips,
@@ -1693,7 +1926,7 @@ def create_app(
                     fallback_url=path_for(request, "dashboard"),
                 )
 
-            return render_trip_detail_screen(
+            return await render_trip_detail_screen(
                 request,
                 trip=trip,
                 trips=trips,
@@ -1705,7 +1938,7 @@ def create_app(
         if not is_htmx_request(request):
             return RedirectResponse(destination_url, status_code=303)
 
-        return render_home_screen(
+        return await render_home_screen(
             request,
             trips=trips,
             trip_list_error=trip_list_error,
@@ -1915,7 +2148,7 @@ def create_app(
                 fallback_url=path_for(request, "view_trip", trip_id=trip_id),
             )
 
-        return render_trip_detail_screen(
+        return await render_trip_detail_screen(
             request,
             trip=trip,
             trips=trips,
@@ -2064,7 +2297,7 @@ def create_app(
                 ),
             )
 
-        return render_trip_detail_screen(
+        return await render_trip_detail_screen(
             request,
             trip=trip,
             trips=trips,
@@ -2278,7 +2511,7 @@ def create_app(
                 fallback_url=path_for(request, "dashboard"),
             )
 
-        return render_trip_detail_screen(
+        return await render_trip_detail_screen(
             request,
             trip=trip,
             trips=trips,
