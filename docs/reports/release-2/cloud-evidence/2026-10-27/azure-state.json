@@ -1,0 +1,346 @@
+{
+  "captured_at_utc": "2026-10-27T09:06:00.912677+00:00",
+  "apps": [
+    {
+      "env": [
+        {
+          "name": "STUDENT4_BACKEND_AI_MODE_BASE_URL",
+          "value": "http://host.docker.internal:8006"
+        },
+        {
+          "name": "STUDENT4_BACKEND_MCP_ENABLED",
+          "value": "false"
+        },
+        {
+          "name": "STUDENT4_BACKEND_MULTI_AGENT_ENABLED",
+          "value": "false"
+        },
+        {
+          "name": "STUDENT4_BACKEND_RAG_BASE_URL",
+          "value": "http://host.docker.internal:8011"
+        },
+        {
+          "name": "STUDENT4_BACKEND_RAG_ENABLED",
+          "value": "false"
+        }
+      ],
+      "external": false,
+      "fqdn": "student-4-backend.internal.lemonrock-5a94d8cd.australiaeast.azurecontainerapps.io",
+      "image": "tripgenie0e70b80e.azurecr.io/tripgenie-student-4-backend:7bcedc9860cabbf4f1ab378c368102c36a1c9be2",
+      "latestReadyRevision": "student-4-backend--0000013",
+      "latestRevision": "student-4-backend--0000013",
+      "maxReplicas": 1,
+      "minReplicas": 1,
+      "name": "student-4-backend",
+      "pullIdentity": "tripgenie-acr-pull",
+      "targetPort": 8008,
+      "transport": "Tcp"
+    },
+    {
+      "env": null,
+      "external": false,
+      "fqdn": "shared-database.internal.lemonrock-5a94d8cd.australiaeast.azurecontainerapps.io",
+      "image": "tripgenie0e70b80e.azurecr.io/tripgenie-shared-database:7bcedc9860cabbf4f1ab378c368102c36a1c9be2",
+      "latestReadyRevision": "shared-database--0000011",
+      "latestRevision": "shared-database--0000011",
+      "maxReplicas": 1,
+      "minReplicas": 1,
+      "name": "shared-database",
+      "pullIdentity": "tripgenie-acr-pull",
+      "targetPort": 9101,
+      "transport": "Tcp"
+    },
+    {
+      "env": null,
+      "external": false,
+      "fqdn": "student-1-database.internal.lemonrock-5a94d8cd.australiaeast.azurecontainerapps.io",
+      "image": "tripgenie0e70b80e.azurecr.io/tripgenie-student-1-database:7bcedc9860cabbf4f1ab378c368102c36a1c9be2",
+      "latestReadyRevision": "student-1-database--0000012",
+      "latestRevision": "student-1-database--0000012",
+      "maxReplicas": 1,
+      "minReplicas": 1,
+      "name": "student-1-database",
+      "pullIdentity": "tripgenie-acr-pull",
+      "targetPort": 8002,
+      "transport": "Tcp"
+    },
+    {
+      "env": [
+        {
+          "name": "STUDENT1_BACKEND_MCP_ENABLED",
+          "value": "false"
+        },
+        {
+          "name": "STUDENT1_BACKEND_MULTI_AGENT_ENABLED",
+          "value": "false"
+        },
+        {
+          "name": "STUDENT1_BACKEND_RAG_BASE_URL",
+          "value": "http://host.docker.internal:8011"
+        },
+        {
+          "name": "STUDENT1_BACKEND_RAG_ENABLED",
+          "value": "false"
+        }
+      ],
+      "external": false,
+      "fqdn": "student-1-backend.internal.lemonrock-5a94d8cd.australiaeast.azurecontainerapps.io",
+      "image": "tripgenie0e70b80e.azurecr.io/tripgenie-student-1-backend:7bcedc9860cabbf4f1ab378c368102c36a1c9be2",
+      "latestReadyRevision": "student-1-backend--0000014",
+      "latestRevision": "student-1-backend--0000014",
+      "maxReplicas": 1,
+      "minReplicas": 1,
+      "name": "student-1-backend",
+      "pullIdentity": "tripgenie-acr-pull",
+      "targetPort": 8001,
+      "transport": "Tcp"
+    },
+    {
+      "env": [],
+      "external": true,
+      "fqdn": "student-4-frontend.lemonrock-5a94d8cd.australiaeast.azurecontainerapps.io",
+      "image": "tripgenie0e70b80e.azurecr.io/tripgenie-student-4-frontend:7bcedc9860cabbf4f1ab378c368102c36a1c9be2",
+      "latestReadyRevision": "student-4-frontend--0000011",
+      "latestRevision": "student-4-frontend--0000011",
+      "maxReplicas": 1,
+      "minReplicas": 0,
+      "name": "student-4-frontend",
+      "pullIdentity": "tripgenie-acr-pull",
+      "targetPort": 8084,
+      "transport": "Auto"
+    },
+    {
+      "env": [],
+      "external": true,
+      "fqdn": "student-5-frontend.lemonrock-5a94d8cd.australiaeast.azurecontainerapps.io",
+      "image": "tripgenie0e70b80e.azurecr.io/tripgenie-student-5-frontend:7bcedc9860cabbf4f1ab378c368102c36a1c9be2",
+      "latestReadyRevision": "student-5-frontend--0000012",
+      "latestRevision": "student-5-frontend--0000012",
+      "maxReplicas": 1,
+      "minReplicas": 0,
+      "name": "student-5-frontend",
+      "pullIdentity": "tripgenie-acr-pull",
+      "targetPort": 8085,
+      "transport": "Auto"
+    },
+    {
+      "env": null,
+      "external": false,
+      "fqdn": "student-2-database.internal.lemonrock-5a94d8cd.australiaeast.azurecontainerapps.io",
+      "image": "tripgenie0e70b80e.azurecr.io/tripgenie-student-2-database:7bcedc9860cabbf4f1ab378c368102c36a1c9be2",
+      "latestReadyRevision": "student-2-database--0000014",
+      "latestRevision": "student-2-database--0000014",
+      "maxReplicas": 1,
+      "minReplicas": 1,
+      "name": "student-2-database",
+      "pullIdentity": "tripgenie-acr-pull",
+      "targetPort": 9001,
+      "transport": "Tcp"
+    },
+    {
+      "env": [
+        {
+          "name": "STUDENT3_BACKEND_AI_MODE_BASE_URL",
+          "value": "http://host.docker.internal:8006"
+        },
+        {
+          "name": "STUDENT3_BACKEND_MCP_BASE_URL",
+          "value": "http://host.docker.internal:8012/mcp"
+        },
+        {
+          "name": "STUDENT3_BACKEND_MCP_ENABLED",
+          "value": "false"
+        },
+        {
+          "name": "STUDENT3_BACKEND_MULTI_AGENT_ENABLED",
+          "value": "false"
+        },
+        {
+          "name": "STUDENT3_BACKEND_RAG_BASE_URL",
+          "value": "http://host.docker.internal:8011"
+        },
+        {
+          "name": "STUDENT3_BACKEND_RAG_ENABLED",
+          "value": "false"
+        }
+      ],
+      "external": false,
+      "fqdn": "student-3-backend.internal.lemonrock-5a94d8cd.australiaeast.azurecontainerapps.io",
+      "image": "tripgenie0e70b80e.azurecr.io/tripgenie-student-3-backend:7bcedc9860cabbf4f1ab378c368102c36a1c9be2",
+      "latestReadyRevision": "student-3-backend--0000014",
+      "latestRevision": "student-3-backend--0000014",
+      "maxReplicas": 1,
+      "minReplicas": 1,
+      "name": "student-3-backend",
+      "pullIdentity": "tripgenie-acr-pull",
+      "targetPort": 8003,
+      "transport": "Tcp"
+    },
+    {
+      "env": [],
+      "external": false,
+      "fqdn": "student-4-database.internal.lemonrock-5a94d8cd.australiaeast.azurecontainerapps.io",
+      "image": "tripgenie0e70b80e.azurecr.io/tripgenie-student-4-database:7bcedc9860cabbf4f1ab378c368102c36a1c9be2",
+      "latestReadyRevision": "student-4-database--0000012",
+      "latestRevision": "student-4-database--0000012",
+      "maxReplicas": 1,
+      "minReplicas": 1,
+      "name": "student-4-database",
+      "pullIdentity": "tripgenie-acr-pull",
+      "targetPort": 8009,
+      "transport": "Tcp"
+    },
+    {
+      "env": [
+        {
+          "name": "STUDENT5_BACKEND_AI_MODE_BASE_URL",
+          "value": "http://host.docker.internal:8006"
+        },
+        {
+          "name": "STUDENT5_BACKEND_MCP_ENABLED",
+          "value": "false"
+        },
+        {
+          "name": "STUDENT5_BACKEND_MULTI_AGENT_ENABLED",
+          "value": "false"
+        },
+        {
+          "name": "STUDENT5_BACKEND_RAG_BASE_URL",
+          "value": "http://host.docker.internal:8011"
+        },
+        {
+          "name": "STUDENT5_BACKEND_RAG_ENABLED",
+          "value": "false"
+        }
+      ],
+      "external": false,
+      "fqdn": "student-5-backend.internal.lemonrock-5a94d8cd.australiaeast.azurecontainerapps.io",
+      "image": "tripgenie0e70b80e.azurecr.io/tripgenie-student-5-backend:7bcedc9860cabbf4f1ab378c368102c36a1c9be2",
+      "latestReadyRevision": "student-5-backend--0000014",
+      "latestRevision": "student-5-backend--0000014",
+      "maxReplicas": 1,
+      "minReplicas": 1,
+      "name": "student-5-backend",
+      "pullIdentity": "tripgenie-acr-pull",
+      "targetPort": 8005,
+      "transport": "Tcp"
+    },
+    {
+      "env": [],
+      "external": true,
+      "fqdn": "student-3-frontend.lemonrock-5a94d8cd.australiaeast.azurecontainerapps.io",
+      "image": "tripgenie0e70b80e.azurecr.io/tripgenie-student-3-frontend:7bcedc9860cabbf4f1ab378c368102c36a1c9be2",
+      "latestReadyRevision": "student-3-frontend--0000013",
+      "latestRevision": "student-3-frontend--0000013",
+      "maxReplicas": 1,
+      "minReplicas": 0,
+      "name": "student-3-frontend",
+      "pullIdentity": "tripgenie-acr-pull",
+      "targetPort": 8093,
+      "transport": "Auto"
+    },
+    {
+      "env": [],
+      "external": true,
+      "fqdn": "student-1-frontend.lemonrock-5a94d8cd.australiaeast.azurecontainerapps.io",
+      "image": "tripgenie0e70b80e.azurecr.io/tripgenie-student-1-frontend:7bcedc9860cabbf4f1ab378c368102c36a1c9be2",
+      "latestReadyRevision": "student-1-frontend--0000013",
+      "latestRevision": "student-1-frontend--0000013",
+      "maxReplicas": 1,
+      "minReplicas": 0,
+      "name": "student-1-frontend",
+      "pullIdentity": "tripgenie-acr-pull",
+      "targetPort": 8081,
+      "transport": "Auto"
+    },
+    {
+      "env": [],
+      "external": false,
+      "fqdn": "student-3-database.internal.lemonrock-5a94d8cd.australiaeast.azurecontainerapps.io",
+      "image": "tripgenie0e70b80e.azurecr.io/tripgenie-student-3-database:7bcedc9860cabbf4f1ab378c368102c36a1c9be2",
+      "latestReadyRevision": "student-3-database--0000014",
+      "latestRevision": "student-3-database--0000014",
+      "maxReplicas": 1,
+      "minReplicas": 1,
+      "name": "student-3-database",
+      "pullIdentity": "tripgenie-acr-pull",
+      "targetPort": 8004,
+      "transport": "Tcp"
+    },
+    {
+      "env": [
+        {
+          "name": "MULTI_AGENT_ENABLED",
+          "value": "false"
+        }
+      ],
+      "external": false,
+      "fqdn": "student-2-backend.internal.lemonrock-5a94d8cd.australiaeast.azurecontainerapps.io",
+      "image": "tripgenie0e70b80e.azurecr.io/tripgenie-student-2-backend:7bcedc9860cabbf4f1ab378c368102c36a1c9be2",
+      "latestReadyRevision": "student-2-backend--0000014",
+      "latestRevision": "student-2-backend--0000014",
+      "maxReplicas": 1,
+      "minReplicas": 1,
+      "name": "student-2-backend",
+      "pullIdentity": "tripgenie-acr-pull",
+      "targetPort": 9000,
+      "transport": "Tcp"
+    },
+    {
+      "env": null,
+      "external": false,
+      "fqdn": "shared-backend.internal.lemonrock-5a94d8cd.australiaeast.azurecontainerapps.io",
+      "image": "tripgenie0e70b80e.azurecr.io/tripgenie-shared-backend:7bcedc9860cabbf4f1ab378c368102c36a1c9be2",
+      "latestReadyRevision": "shared-backend--0000014",
+      "latestRevision": "shared-backend--0000014",
+      "maxReplicas": 1,
+      "minReplicas": 1,
+      "name": "shared-backend",
+      "pullIdentity": "tripgenie-acr-pull",
+      "targetPort": 9100,
+      "transport": "Tcp"
+    },
+    {
+      "env": [],
+      "external": false,
+      "fqdn": "student-5-database.internal.lemonrock-5a94d8cd.australiaeast.azurecontainerapps.io",
+      "image": "tripgenie0e70b80e.azurecr.io/tripgenie-student-5-database:7bcedc9860cabbf4f1ab378c368102c36a1c9be2",
+      "latestReadyRevision": "student-5-database--0000012",
+      "latestRevision": "student-5-database--0000012",
+      "maxReplicas": 1,
+      "minReplicas": 1,
+      "name": "student-5-database",
+      "pullIdentity": "tripgenie-acr-pull",
+      "targetPort": 8007,
+      "transport": "Tcp"
+    },
+    {
+      "env": [],
+      "external": true,
+      "fqdn": "student-2-frontend.lemonrock-5a94d8cd.australiaeast.azurecontainerapps.io",
+      "image": "tripgenie0e70b80e.azurecr.io/tripgenie-student-2-frontend:7bcedc9860cabbf4f1ab378c368102c36a1c9be2",
+      "latestReadyRevision": "student-2-frontend--0000012",
+      "latestRevision": "student-2-frontend--0000012",
+      "maxReplicas": 1,
+      "minReplicas": 0,
+      "name": "student-2-frontend",
+      "pullIdentity": "tripgenie-acr-pull",
+      "targetPort": 9003,
+      "transport": "Auto"
+    },
+    {
+      "env": [],
+      "external": true,
+      "fqdn": "shared-ui.lemonrock-5a94d8cd.australiaeast.azurecontainerapps.io",
+      "image": "tripgenie0e70b80e.azurecr.io/tripgenie-shared-ui:7bcedc9860cabbf4f1ab378c368102c36a1c9be2",
+      "latestReadyRevision": "shared-ui--0000012",
+      "latestRevision": "shared-ui--0000012",
+      "maxReplicas": 1,
+      "minReplicas": 0,
+      "name": "shared-ui",
+      "pullIdentity": "tripgenie-acr-pull",
+      "targetPort": 80,
+      "transport": "Auto"
+    }
+  ]
+}

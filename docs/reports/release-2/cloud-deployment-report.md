@@ -1,288 +1,228 @@
 # TripGenie Release 2 Cloud Deployment Report
 
-> **Status: DRAFT. Not reviewed, and the release decision is pending.**
-> Refs #171. The group PDF is due 25 Oct 2026, 11:59 PM AEST.
->
-> This report covers the first `cloud-deployment.yml` run, made on 21 Oct
-> 2026, and the checks that followed it. It does not claim an agentic-loop
-> review, a final release decision or the showcase video. Those are listed
-> under [Pending evidence](#pending-evidence).
+> **Updated 27 October 2026 after the successful deployment of PR #189.**
+> Refs #171. This report describes the verified cloud baseline, not a claim
+> that all group assessment evidence is complete. Earlier 21 October evidence
+> is preserved separately and is not presented as the current deployed state.
 
 ## At a glance
 
-| Item | State (21 Oct 2026) |
+| Item | Verified state on 27 October 2026 |
 | --- | --- |
-| Deployment tooling | Lab 11-style shell scripts, ACR and a Compose-to-Azure renderer (#179). Cloud-ready frontends and the AI-off profile came in #180. Prerequisite fixes came in #187. |
-| Cloud Deployment workflow | [Run 39580927565](https://github.com/YourNightmareIsOver/TripGenie/actions/runs/39580927565) **succeeded on its first attempt** at 10:07:58Z (21:07:58 AEDT), building `main` at `188951a` |
-| Azure resources | 18 apps run the full-SHA image. Each latest revision is Healthy and serves 100% of traffic. [Details](cloud-evidence/run-39580927565-summary.md) |
-| Public frontends | 6 of 6 return HTTP 200 over HTTPS. [Screenshots](cloud-evidence/live-checks-2026-10-21.md#screenshots-of-the-six-public-frontends) |
-| Cloud CRUD | Student 1 is checked by the workflow. Students 2–5 were checked manually with disposable records ([evidence](cloud-evidence/live-checks-2026-10-21.md#students-25-crud-through-the-cloud-frontends)). |
-| AI off | No AI services are deployed. RAG, MCP and the assistant are switched off by flags. Three direct AI-Mode paths are unreachable but not disabled ([details](#ai-off-configuration)). |
-| Observed cost | AUD 5.91 for 19–21 Oct, with 21 Oct only partly billed ([details](cloud-evidence/cost-2026-10-21.md)) |
-| Agentic-loop Cloud Deployment Review | **Not available.** The mode is not on `main`. |
-| Final human release decision | **Pending** |
+| Deployed application | `7bcedc9860cabbf4f1ab378c368102c36a1c9be2`, the merge of [PR #189](https://github.com/YourNightmareIsOver/TripGenie/pull/189) into `main` |
+| Cloud Deployment | [Run 40476984860](https://github.com/YourNightmareIsOver/TripGenie/actions/runs/40476984860), successful; 08:55:54-09:03:02 UTC (completed 20:03:02 AEDT) |
+| Azure revision gate | All 18 applications use the intended full-SHA image; each latest revision is also its latest ready revision |
+| Public frontends | Six HTTPS frontends returned HTTP 200; fresh browser screenshots captured after deployment |
+| Automated deployment results | 41 validation checks and six security-configuration checks passed |
+| Student 1 post-commit tests | Seven passed at the deployed SHA; zero failures, errors or skips; JUnit suite time 0.220 seconds |
+| Current observed cost | AUD 35.72 returned for `rg-tripgenie`; usage through 27 October is partial because of billing lag |
+| Review and approval | The 26 October review records Accept / READY for the earlier deployment. The 27 October rollout was explicitly authorized; it is not mislabelled as a new model review |
+| Cloud AI boundary | No AI services deployed. Student 1 AI controls are disabled/hidden; direct Student 3/5 AI paths remain unavailable rather than explicitly switched off |
 
 ## Report narrative (for the group PDF)
 
-TripGenie's Release 2 cloud baseline runs on Azure Container Apps in
-`rg-tripgenie` (Australia East). It uses the Consumption profile of the
-`tripgenie-env` environment. The deployment follows ASD Lab 11's shell scripts
-rather than an infrastructure-as-code template. `compose_to_azure.py` renders
-the 18 apps directly from `docker-compose.yml`: a frontend, backend and
-database for each of the five students, plus the shared reference service.
-Images are tagged with the commit SHA and pushed to a private Azure Container
-Registry with the admin user disabled. Every app pulls through one
-registry-scoped AcrPull identity, `tripgenie-acr-pull`.
+TripGenie's cloud baseline runs on Azure Container Apps in Australia East,
+using the Consumption profile of `tripgenie-env`. Lab 11-style shell scripts
+render 18 applications from Docker Compose: five frontend/backend/database
+slices and the shared portal, reference API and database. Six frontends
+expose public HTTPS endpoints; twelve backend/database services use internal
+TCP ingress. Each feature frontend calls its own backend, and each backend
+owns access to its database service. The portal provides navigation links,
+not an API proxy.
 
-Six apps have public HTTPS ingress: the portal and five student frontends.
-The twelve backends and databases accept only internal TCP on their Compose
-ports, so no database is reachable from the internet.
+Docker images are stored in Azure Container Registry with full commit-SHA
+tags. GitHub Actions authenticates to Azure through OIDC federation; the
+`tripgenie-acr-pull` managed identity has registry-scoped image-pull access.
+Registry admin and anonymous access are disabled. The development flow is
+source control, local pre-commit security scans, GitHub Actions post-commit
+tests and Docker validation, followed by a manually dispatched
+`cloud-deployment.yml`. Deployment reruns all seven reusable service
+workflows before building, pushing and releasing images. A revision gate
+checks the intended image on the newest ready revision rather than accepting
+an older healthy revision.
 
-GitHub Actions signs in to Azure with OIDC through a managed identity, so the
-repository stores identifiers, not passwords. `cloud-deployment.yml` first
-reruns every service's CI. A `production` environment gate then guards the
-deploy job, which builds, pushes and deploys the images. The job waits until
-each app's latest revision is ready with the requested image, and then runs a
-smoke test.
+On 27 October 2026, run **40476984860** successfully deployed commit
+**7bcedc9**, including merged PR #189. All 18 applications were independently
+confirmed at that image with their latest revisions ready. The generated
+report records **41 passing validation checks and six passing
+security-configuration checks**. All public frontends returned HTTP 200.
+Student 1's trip create/read/delete flow succeeded, deletion was confirmed,
+and its disabled RAG route returned HTTP 503. Student 1's seven HTTP endpoint
+tests also passed at the deployed commit, covering trip creation and
+itinerary-item creation with valid and invalid inputs.
 
-AI-Mode, MCP, RAG, the Multi-Agent Server and the agentic loop run only on the
-developer host. The cloud profile switches off RAG, MCP and the Student 4
-assistant. Three direct AI-Mode paths have no flag. They point at a
-host-only address, so they are unreachable in Azure.
+The cloud remains a non-AI baseline: AI-Mode, MCP, RAG, Ollama and the
+Multi-Agent Server run locally, not in Azure. Student 1 hides its disabled
+AI controls; direct AI calls in Students 3 and 5 still target an unavailable
+host-only service. SQLite data is ephemeral, frontends can cold-start, and
+application logs are not routed to Log Analytics. Observed resource-group
+cost was **AUD 35.72**, including a partial 27 October billing row.
 
-A pre-rollout inspection on 21 Oct found five apps whose latest revision had
-failed on a placeholder image. A first-attempt workflow run then deployed
-commit `188951a` and fixed this. All 18 latest revisions are now healthy,
-every frontend returns HTTP 200, and CRUD worked for all five features with
-disposable records.
-
-There are three trade-offs. Each database is a single SQLite replica on the
-container filesystem, so data resets to the seed on every new revision.
-Frontends scale to zero and cold-start. App logs are not routed to Log
-Analytics.
-
-The agentic-loop review and the human release decision are still pending.
-
-*(About 360 words. Update the last paragraph once the review and the decision
-exist.)*
+The earlier Cloud Deployment Review records Accept / READY for the
+23 October deployment, while this newer rollout has separate automated
+evidence and explicit human deployment authorization. The current
+`production` environment permits only `main` but has no required-reviewer
+rule. Dedicated endpoint artifacts are present for Students 1, 3 and 5,
+not 2 and 4; deployment success must not conceal these evidence gaps.
 
 ## Azure reference architecture
 
-```mermaid
-flowchart LR
-  user["Browser"]
+![Azure architecture: six public frontends, twelve internal services, OIDC and managed-identity image pulls](cloud-evidence/architecture/azure-reference-architecture.png)
 
-  subgraph github["GitHub: YourNightmareIsOver/TripGenie"]
-    wf["Actions: cloud-deployment.yml<br/>workflow_dispatch only"]
-    gate["production environment<br/>main only, required reviewer"]
-  end
+*Figure 1. Azure reference architecture for deployed source `7bcedc9`.
+Grouped student boxes represent five distinct applications. Internal ingress
+is not per-service authorization, and OIDC is deployment authentication,
+not application-user authentication.*
 
-  subgraph rgGithub["Resource group rg-tripgenie-github (kept by cleanup.sh)"]
-    mi["User-assigned managed identity<br/>federated OIDC credential"]
-  end
-
-  subgraph rgApp["Resource group rg-tripgenie, australiaeast"]
-    acr["Azure Container Registry<br/>tripgenie0e70b80e.azurecr.io<br/>admin user disabled, tag = commit SHA"]
-    pull["User-assigned identity tripgenie-acr-pull<br/>AcrPull on the registry only"]
-    sa["Storage account<br/>exists, not mounted by any app"]
-    law["Log Analytics workspaces<br/>exist, app logs not routed"]
-    subgraph cae["Container Apps environment tripgenie-env, Consumption profile"]
-      subgraph ext["External HTTPS ingress: 6 apps, min replicas 0"]
-        sui["shared-ui portal"]
-        sfe["student-1..5-frontend"]
-      end
-      subgraph inner["Internal TCP ingress only: 12 apps, 1 replica"]
-        sbe["shared-backend :9100"]
-        sdb["shared-database<br/>SQLite, ephemeral"]
-        stbe["student-1..5-backend"]
-        stdb["student-1..5-database<br/>SQLite on container FS, ephemeral"]
-      end
-    end
-  end
-
-  subgraph hostOnly["Developer host only, not deployed"]
-    aimode["AI-Mode :8006 + Ollama"]
-    rag["RAG server :8011"]
-    mcp["MCP server :8012/mcp"]
-    mas["Multi-Agent Server"]
-    loop["Agentic loop"]
-  end
-
-  user -->|HTTPS| sui
-  user -->|HTTPS| sfe
-  sui -->|HTTPS portal links| sfe
-  sui --> sbe
-  sbe --> sdb
-  sfe -->|own backend only| stbe
-  stbe -->|sole caller| stdb
-  stbe -->|reference data| sbe
-  stbe -->|"public APIs, e.g. Student 1 itinerary"| stbe
-
-  wf -->|OIDC token exchange| mi
-  gate -.->|approves deploy job| wf
-  mi -->|"Contributor + User Access Administrator, scoped to rg-tripgenie"| rgApp
-  wf -->|"docker push, tag = github.sha"| acr
-  cae -->|"image pull as tripgenie-acr-pull"| pull
-  pull -->|AcrPull| acr
-
-  stbe -.->|"flags off, URL unset or host-only URL; unreachable from Azure"| aimode
-  aimode --- mcp
-  aimode --- rag
-```
-
-**Identity.** Since #187, all 18 apps pull images through the user-assigned
-`tripgenie-acr-pull` identity, which holds AcrPull on the registry only. The
-earlier per-app system-assigned identities have been removed. Their AcrPull
-role assignments are orphaned and remain until an optional cleanup. The
-deployment identity keeps User Access Administrator, scoped to `rg-tripgenie`,
-so it can grant that pull role.
-
-**Differences from the original #171 task list.** The deployed system uses
-**ACR, not GHCR**, and shell scripts, **not Bicep**. There is **no Azure Files
-mount**: the storage account is unused and the environment storage list is
-empty. Two Log Analytics workspaces exist in the group, but the environment
-has no app-log destination. A header comment in
-`shared/configuration/.env.cloud` still mentions Bicep parameters, and that
-comment is stale.
+[Editable SVG](cloud-evidence/architecture/azure-reference-architecture.svg).
+The implementation uses ACR, shell scripts and ephemeral SQLite: not GHCR,
+Bicep or an Azure Files database mount. The stale Bicep comment in the cloud
+profile does not describe the actual deployment implementation.
 
 ## DevOps flow
 
-```mermaid
-flowchart TD
-  dev["Developer commit"] --> pre["Pre-commit security scan<br/>scripts/security/scan.py, JSON per run"]
-  pre --> push["Push / pull request to GitHub"]
-  push --> ci["Per-service CI workflows<br/>lint, tests, Docker and Compose checks"]
-  ci --> ept["Post-commit endpoint tests<br/>e.g. Student 1: JUnit XML + Markdown artifact"]
-  ept --> merge["Merge to main"]
-  merge --> dispatch["Manual dispatch: cloud-deployment.yml"]
-  dispatch --> reuse["Reruns all 7 service CI workflows"]
-  reuse --> approve["production gate: required reviewer approves"]
-  approve --> login["azure/login via OIDC"]
-  login --> s1["env-setup.sh"]
-  s1 --> s2["build-images.sh<br/>docker build + push to ACR, tag = commit SHA"]
-  s2 --> s3["deploy-azure-env.sh"]
-  s3 --> s4["deploy-azure.sh<br/>18 apps, pull via tripgenie-acr-pull"]
-  s4 --> gate2["Revision gate: latest revision ready<br/>with the requested image"]
-  gate2 --> s5["deployment-testing.sh + smoke_test.py"]
-  s5 --> art["cloud-deployment-results.md<br/>job summary + cloud-deployment-evidence artifact"]
-  art --> review["Agentic-loop Cloud Deployment Review<br/>PENDING: mode not on main"]
-  review --> decision["Written human release decision<br/>PENDING"]
-```
+![Git source control through pre-commit scans, post-commit testing, Docker validation, deployment, evidence and human review](cloud-evidence/architecture/cicd-deployment-flow.png)
 
-Run [39580927565](https://github.com/YourNightmareIsOver/TripGenie/actions/runs/39580927565)
-completed every step up to and including the artifact. Its step timings,
-revision lines and artifacts are in the
-[run summary](cloud-evidence/run-39580927565-summary.md). The smoke test
-covers six frontend GETs, the Student 1 trip create, read, delete and
-verify-gone cycle, and a 503 from Student 1's RAG panel. It does not cover
-CRUD for Students 2–5, which was checked separately (see the
-[evidence index](#evidence-index)).
+*Figure 2. Source-to-cloud delivery, with missing endpoint artifacts and the
+unconfigured required-reviewer rule explicitly marked.*
+
+[Editable SVG](cloud-evidence/architecture/cicd-deployment-flow.svg).
+The local security gate uses Ruff security rules, detect-secrets and pip-audit.
+The assessment requires tests for two backend/API functions per student;
+Student 1 tests `POST /api/trips` and
+`POST /api/trips/{trip_id}/itinerary-items` against its real Compose stack.
+The successful cloud run reused shared, AI-Mode and all five student workflows.
+A failed prerequisite job prevents deployment.
+
+The deploy job runs in `production`, authenticates with `azure/login`, builds
+and pushes images, updates Container Apps, checks revision readiness, and
+publishes the validation report. See the [actual step timings and revision
+table](cloud-evidence/2026-10-27/run-summary.md), rather than treating a diagram
+as execution evidence.
+
+## Current deployment screenshots
+
+![Actual GitHub Actions page showing successful Cloud Deployment run 40476984860 at 7bcedc9](cloud-evidence/2026-10-27/screenshots/cloud-run.png)
+
+*Figure 3. Actual public GitHub Actions run page, captured after completion.
+The displayed run number is #7; its API run ID is 40476984860. Runner/action
+deprecation warnings remain visible and are not represented as failures.*
+
+![Complete original deployment report with 41 passing validation rows and six passing security rows](cloud-evidence/2026-10-27/screenshots/cloud-deployment-results.png)
+
+*Figure 4. Complete downloaded deployment artifact rendered in a browser,
+with an added provenance header. This is explicitly a rendered artifact,
+not a fabricated GitHub report screen. The
+[original Markdown](cloud-evidence/2026-10-27/cloud-deployment-results.md)
+retains all text, including the original pending-review sentence.*
+
+![Student 1 deployed frontend showing ordinary trip and itinerary functionality](cloud-evidence/2026-10-27/screenshots/student-1-frontend.png)
+
+*Figure 5. Student 1's real Azure frontend after deployment.
+[All six frontend captures](cloud-evidence/2026-10-27/run-summary.md#live-frontend-screenshots)
+record URLs, titles, HTTP results and capture times. These read-only captures
+do not claim a fresh full CRUD cycle for Students 2-5.*
 
 ## AI-off configuration
 
-The full table of deployed settings is in
-[`ai-off-2026-10-21.md`](cloud-evidence/ai-off-2026-10-21.md). In summary:
+The [read-only Azure snapshot](cloud-evidence/2026-10-27/azure-state.json)
+contains selected non-secret AI settings and the deployed image for every app.
 
-| State | Scope | Evidence |
-| --- | --- | --- |
-| Not deployed | AI-Mode, Ollama, MCP server, RAG server, Multi-Agent Server, agentic loop | Absent from the 18-app list |
-| Disabled by flag | RAG and MCP for Students 1, 3, 4 and 5; Student 4 assistant (`AI_ASSISTANT_ENABLED=false`) | Deployed settings read 21 Oct. Student 1 RAG returned **503 live** in the run. The others were not live-tested. |
-| Disabled because no URL is set | Student 2 AI-assisted search and RAG (`AI_MODE_URL` and `RAG_URL` absent) | Deployed settings read 21 Oct. Not live-tested. |
-| **Unreachable, not disabled** | Student 1 AI suggestions, Student 3 AI transport suggestions, Student 5 AI budget analysis | Each AI-Mode URL is `http://host.docker.internal:8006`, which does not exist in Azure. Student 1's backend would treat a *blank* URL as disabled, but the deployed URL is not blank. These paths were not called live. [PR #190](https://github.com/YourNightmareIsOver/TripGenie/pull/190) would blank Student 1's URL in the cloud and drive AI UI visibility from `/api/ai-features`. That PR is **open, not merged or deployed**, and it is not part of `188951a`. |
-| Still visible in the UI | AI, RAG and MCP controls on the Student 2–5 pages | Shown in the [screenshots](cloud-evidence/live-checks-2026-10-21.md). Hiding them is not deployed. |
-
-## Ownership
-
-| Area | Owner |
+| Scope | Current configuration and interpretation |
 | --- | --- |
-| This report, architecture and release decision (#171) | Student 1 (`aadirai31`) |
-| Required reviewer on the `production` environment | `aadirai31` |
-| Deployment scripts, workflow, cloud profile and prerequisite fixes (#179, #180, #187) | Student 1, merged |
-| Agentic-loop Cloud Deployment Review mode | The teammate who owns the shared agentic loop. Not yet on `main`. |
-| Cloud CRUD for each feature | Each student for their own slice. Point-in-time checks are recorded here. |
+| Shared AI services | AI-Mode, Ollama, MCP, RAG, Multi-Agent Server and the local review loop are absent from the 18-app cloud inventory |
+| Student 1 | AI-Mode URL omitted; RAG, MCP and Multi-Agent flags false. #190's visibility fix is merged and deployed; the newly merged planner remains disabled by the cloud profile |
+| Student 2 | AI-Mode/RAG URLs omitted; `MULTI_AGENT_ENABLED=false` |
+| Student 3 | RAG, MCP and Multi-Agent flags false. Direct AI-Mode URL remains `http://host.docker.internal:8006`: unavailable, not explicitly disabled |
+| Student 4 | MCP/assistant, RAG and Multi-Agent flags false. Its assistant flag is read from `STUDENT4_BACKEND_MCP_ENABLED`; the configured host AI URL sits behind that flag |
+| Student 5 | RAG, MCP and Multi-Agent flags false. Direct AI-Mode URL remains `http://host.docker.internal:8006`: unavailable, not explicitly disabled |
 
-## Evidence index
-
-| Evidence | Location | Status |
-| --- | --- | --- |
-| Deployment guide, identity, revision gate and HTTPS settings | [`scripts/deploy/azure/README.md`](../../../scripts/deploy/azure/README.md) | Available |
-| Cloud workflow | [`.github/workflows/cloud-deployment.yml`](../../../.github/workflows/cloud-deployment.yml) | Available |
-| Renderer, smoke test and validation script | [`compose_to_azure.py`](../../../scripts/deploy/azure/compose_to_azure.py), [`smoke_test.py`](../../../scripts/deploy/azure/smoke_test.py), [`deployment-testing.sh`](../../../scripts/deploy/azure/deployment-testing.sh) | Available |
-| AI-off profile | [`shared/configuration/.env.cloud`](../../../shared/configuration/.env.cloud) | Available |
-| Prerequisite fixes | [PR #187](https://github.com/YourNightmareIsOver/TripGenie/pull/187), merged as `188951a` | Merged and deployed by the run below |
-| Successful cloud workflow run | [Run 39580927565](https://github.com/YourNightmareIsOver/TripGenie/actions/runs/39580927565). See the [summary](cloud-evidence/run-39580927565-summary.md) for steps, revision gate and live state. | Available. The artifacts are kept until 2027-01-19. |
-| Validation results artifact | [`run-39580927565-cloud-deployment-results.md`](cloud-evidence/run-39580927565-cloud-deployment-results.md) (verbatim) | Available |
-| `production` approval | Recorded on the run: approved by `aadirai31` for this deployment | **Operational only, not the release decision** |
-| Student 1 post-commit endpoint tests | Run 39580927565 artifact `student-1-endpoint-test-evidence`: 7 of 7 pass. Earlier run [39569785539](https://github.com/YourNightmareIsOver/TripGenie/actions/runs/39569785539). [Report](student-1-post-commit-testing-report.md) | Available |
-| Student 1 pre-commit security scan | [Report](student-1-pre-commit-security-report.md) (#182) | Historical scan evidence. It does not prove that every commit on every machine was scanned. |
-| Frontend screenshots | [Live checks](cloud-evidence/live-checks-2026-10-21.md#screenshots-of-the-six-public-frontends), [`screenshots/`](cloud-evidence/screenshots/) | Captured 11:12Z, 21 Oct |
-| Students 2–5 cloud CRUD | [Live checks](cloud-evidence/live-checks-2026-10-21.md#students-25-crud-through-the-cloud-frontends) | 28 of 28 checks passed with disposable records. Manual, not CI. |
-| AI-off settings | [`ai-off-2026-10-21.md`](cloud-evidence/ai-off-2026-10-21.md) | Available, with stated gaps |
-| Observed cost | [`cost-2026-10-21.md`](cloud-evidence/cost-2026-10-21.md) | Partial: billing lags |
-| Pre-rollout inspection | Read-only, 21 Oct 2026, summarised under [Known limitations](#known-limitations) | Historical observation |
-
-## Known limitations
-
-- **Ephemeral data.** Each database runs one replica and stores SQLite on the
-  container filesystem. A restart or new revision resets it to the seed data,
-  as happened for run 39580927565. No Azure Files share is mounted.
-- **Cold starts.** Frontends scale to zero unless the workflow runs with
-  `frontend_min_replicas=1`. The first portal load on 21 Oct took 17.6 s. The
-  internal apps keep one replica.
-- **Direct AI paths are unreachable rather than disabled** (see
-  [AI-off configuration](#ai-off-configuration)). For Student 1,
-  [PR #190](https://github.com/YourNightmareIsOver/TripGenie/pull/190) would
-  blank the cloud URL and hide the AI controls. It is open but not merged or
-  deployed. Taking effect would need both the merge and a newly authorised
-  deployment. Students 3 and 5 have no equivalent change.
-- **Observability.** Two Log Analytics workspaces exist, but the environment
-  sends no app logs to them. Evidence comes from workflow logs and artifacts.
-- **Leftover role assignments.** The AcrPull grants for the removed system
-  identities are orphaned. Removing them is optional cleanup and has not been
-  done.
-- **Cloud CRUD automation.** Only Student 1 CRUD runs in the workflow.
-  Students 2–5 have point-in-time manual evidence only. Student 5 expenses
-  and Student 4 itinerary links were not tested.
-- **Cost.** The observed AUD 5.91 is partial, because billing lags usage and
-  the 21 Oct row is incomplete. It is not a monthly projection.
-- **Resolved: placeholder revisions and HTTP links.** The 21 Oct pre-rollout
-  inspection found five apps (`shared-database`, `student-1-frontend`,
-  `student-3-frontend`, `student-4-backend` and `student-4-frontend`) whose
-  latest revision had failed on Microsoft's quickstart image. Older revisions
-  were still serving. At the same time, the student frontends emitted
-  `http://` asset and form URLs behind Azure's HTTPS proxy.
-  - **Cause.** With Azure CLI 2.91.0, `az containerapp create
-    --registry-identity system` first stages the quickstart image. In the
-    earlier laptop deployments, the second update that restores the real
-    image never ran.
-  - **Fix.** [PR #187](https://github.com/YourNightmareIsOver/TripGenie/pull/187)
-    added the registry-only `tripgenie-acr-pull` identity and the revision
-    readiness gate. It also sets `FORWARDED_ALLOW_IPS` from the cloud-only
-    `TRIPGENIE_FORWARDED_ALLOW_IPS=*`; locally, only loopback is trusted.
-  - **Deployed.** Run 39580927565 deployed the fix. Every latest revision is
-    now healthy with the SHA image, and the generated links are HTTPS only.
+The workflow live-tested Student 1 RAG's HTTP 503. No model or other AI
+endpoint was invoked for these screenshots. The artifact's generic statement
+that every AI feature is off must be read with the direct-path exceptions
+above; it does not prove every feature was exercised.
 
 ## Final human release decision
 
-**PENDING. Not approved.**
+The [26 October Cloud Deployment Review](https://github.com/YourNightmareIsOver/TripGenie/blob/2085a97cc5a548765ba8a363d960cdb0bdff092f/docs/reports/release-2/agentic-loop/cloud-review.md)
+contains deterministic checks, real implementation/review-agent sections and
+the recorded human decision **Accept. Release decision: READY**. Its source
+was run **39911331439 at `4ed8621`**, not the newer rollout.
 
-The `production` approval on run 39580927565 authorised that operational
-deployment. It is not a release decision. The decision will be written here as
-approve, partially accept or reject, with reasons. It will link to the
-workflow run and the review output, and it can only be recorded after the
-review below exists.
+On 27 October, Student 1 explicitly instructed **"merge and deploy PR 189"**,
+then **"update PR 186 and merge when done"**. These authorize the new rollout
+and publication of its verified report. They are not represented as a new
+interactive agentic-loop acceptance or approval of every assessment criterion.
+The new run's unchanged artifact still says its review is pending.
+
+The earlier review claims that a reviewer gate exists. Direct GitHub API
+evidence now shows only the [`main` branch policy](cloud-evidence/2026-10-27/production-branch-policy.json)
+and [no required-reviewer rule](cloud-evidence/2026-10-27/production-environment.json).
+The environment name alone does not enforce human approval. This qualification
+does not rewrite or revoke the earlier recorded human decision.
+
+## Ownership
+
+| Area | Contribution |
+| --- | --- |
+| Shared Azure deployment, cloud profile, OIDC, registry pull identity, revision gate and report | Student 1; #179, #180, #187 and this report |
+| Student 1 endpoint tests, AI visibility and multi-agent planner | Student 1; #181, #190 and #189 |
+| Shared frontend security headers and deployment security checker | Includes Student 5's #195; not reattributed to Student 1 |
+| Agentic-loop Cloud Deployment Review | Shared review implementation and its recorded reviewer/human outputs |
+| Feature CRUD | Each student owns the implementation for their slice |
+
+## Evidence index
+
+| Evidence | Source and scope |
+| --- | --- |
+| Current run, all steps and 18 intended-image revisions | [Run summary](cloud-evidence/2026-10-27/run-summary.md), [workflow](https://github.com/YourNightmareIsOver/TripGenie/actions/runs/40476984860) |
+| Complete validation/security report | [Unchanged original artifact](cloud-evidence/2026-10-27/cloud-deployment-results.md) |
+| Student 1 endpoint evidence at `7bcedc9` | [Markdown](cloud-evidence/2026-10-27/student-1-endpoint-tests.md), [JUnit XML](cloud-evidence/2026-10-27/student-1-endpoint-tests.xml), [screenshot](cloud-evidence/2026-10-27/screenshots/student-1-endpoint-tests.png) |
+| All current frontend screenshots | [Capture index](cloud-evidence/2026-10-27/run-summary.md#live-frontend-screenshots) |
+| Current Azure settings | [Apps and AI flags](cloud-evidence/2026-10-27/azure-state.json), [environment](cloud-evidence/2026-10-27/environment-state.json), [registry](cloud-evidence/2026-10-27/registry-state.json) |
+| Production protections | [Environment rules](cloud-evidence/2026-10-27/production-environment.json), [branch policy](cloud-evidence/2026-10-27/production-branch-policy.json) |
+| Current observed cost | [AUD 35.72 with date/scope caveats](cloud-evidence/2026-10-27/cost-summary.md) |
+| Capture integrity | [Source run, finalized capture time and file SHA-256 hashes](cloud-evidence/2026-10-27/capture-manifest.json) |
+| Cloud review and recorded decision | [26 October review](https://github.com/YourNightmareIsOver/TripGenie/blob/2085a97cc5a548765ba8a363d960cdb0bdff092f/docs/reports/release-2/agentic-loop/cloud-review.md), covering the earlier deployment |
+| Local real-model workflow, separate from cloud | [Student 1 runtime evidence](student-1-multi-agent-runtime-evidence.md) |
+| Pre-commit security and test implementation | [Security report](student-1-pre-commit-security-report.md), [endpoint report](student-1-post-commit-testing-report.md) |
+| Earlier deployment and Students 2-5 CRUD | [21 October run](cloud-evidence/run-39580927565-summary.md), [28 passing historical manual checks](cloud-evidence/live-checks-2026-10-21.md) |
+| Commit/contribution log with dates | [PR #206](https://github.com/YourNightmareIsOver/TripGenie/pull/206), a separate evidence snapshot |
+
+## Known limitations
+
+- **Persistence and scaling:** SQLite uses ephemeral container storage; restarts
+  or redeployment can reset data. Internal apps use one replica; public
+  frontends have minimum zero and can cold-start.
+- **Observability:** the environment has no app-log destination. This report
+  uses workflow logs, artifacts and point-in-time Azure/browser reads.
+- **Security scope:** public endpoints are not application-user authentication.
+  Internal ingress is not service-level authorization. The portal returns an
+  unversioned `nginx` header; the passing banner check does not mean every
+  server header is absent. The credential-name check is not an exhaustive
+  secret audit. A public-domain 404 is considered alongside ingress configuration.
+- **AI:** merging #189 does not deploy its host services or enable cloud AI.
+  Direct Student 3/5 AI paths remain unavailable; see the exact table above.
+- **Cost:** AUD 35.72 is observed resource-group usage, not a monthly forecast.
+  The 27 October row is partial and does not establish this rollout's final cost.
+- **Coverage:** the cloud workflow automates Student 1 CRUD, not every feature's
+  full CRUD flow. Historical manual checks are kept distinct from today's
+  frontend reads. Student 5 expenses and Student 4 itinerary links are not
+  newly certified by these screenshots.
+- **Historical fixes:** #187 resolved placeholder-image revisions and
+  incorrectly generated HTTP links. The current 18-image readiness evidence
+  confirms the intended image gate remains effective.
 
 ## Pending evidence
 
-1. **Agentic-loop Cloud Deployment Review output and its validation log.**
-   Blocked: `agentic_loop.py` on `main` offers only the `services`, `mcp`,
-   `rag` and `ci` modes. When the review exists, record it in the artifact's
-   "Reviewer Notes".
-2. **The written human release decision**, linked to the run and the review.
-3. **The cloud segment of the showcase video.**
-4. **Optional improvements:**
-   - automated CRUD for Students 2–5 in the cloud smoke test;
-   - live proof that the three direct AI-Mode paths report "unavailable", or
-     disabling them by configuration (for Student 1, merge and deploy
-     [PR #190](https://github.com/YourNightmareIsOver/TripGenie/pull/190));
-   - a later cost query once billing settles.
+The cloud rollout and this report's captures are complete. Remaining group
+assessment qualifications are explicit rather than replaced with invented
+evidence:
+
+1. A fresh interactive Cloud Deployment Review/human decision specifically
+   for `7bcedc9` is not claimed; the existing accepted review covers `4ed8621`.
+2. The current run's [artifact index](cloud-evidence/2026-10-27/artifact-index.json)
+   contains dedicated endpoint artifacts for Students 1, 3 and 5, but not 2
+   and 4. A green shared deployment does not satisfy those missing artifacts.
+3. The video was recorded as confirmed by Student 1. Its final published URL
+   still needs to be included in the group submission; no URL was invented.

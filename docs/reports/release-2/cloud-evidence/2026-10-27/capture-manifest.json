@@ -1,0 +1,132 @@
+{
+  "finalized_at_utc": "2026-10-27T09:11:38.076136+00:00",
+  "run": "https://github.com/YourNightmareIsOver/TripGenie/actions/runs/40476984860",
+  "deployed_sha": "7bcedc9860cabbf4f1ab378c368102c36a1c9be2",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 63,
+      "sha256": "98654913c45824897d47c1fbb11d611e04843a79cfbdf29b9f52e6b917f0e4a8"
+    },
+    {
+      "path": "artifact-index.json",
+      "bytes": 736,
+      "sha256": "2b9e4c7eee36074da5cae9d676746d0d9f0c7a6a871b6b27ac05f97af7f59f51"
+    },
+    {
+      "path": "azure-state.json",
+      "bytes": 12462,
+      "sha256": "2d26b3864b7698ee9e20d38695a788d423375c316a2159d58a3d9e137b2da9f7"
+    },
+    {
+      "path": "cloud-deployment-results.md",
+      "bytes": 5588,
+      "sha256": "d5a9f02e30b758917f695ea82b9811ff6e8ae9f65160efcd08940726ccf43df2"
+    },
+    {
+      "path": "cost-results.json",
+      "bytes": 3482,
+      "sha256": "95a9b3465ed54f8175891d028bc608024309c44282160862db5cc0187e8f3118"
+    },
+    {
+      "path": "cost-summary.md",
+      "bytes": 1324,
+      "sha256": "41dc8d971a7feb399cd5fcc53c2b1eafb9c6d9de5e6768b1b5c4a5fac63c9349"
+    },
+    {
+      "path": "environment-state.json",
+      "bytes": 375,
+      "sha256": "b60a07115fcdfc5876148d0624b68d69b26cfac0aa4730cb804ae934e2e7d566"
+    },
+    {
+      "path": "frontend-captures.json",
+      "bytes": 2694,
+      "sha256": "a42e30ad7352bda24014aa5b7d79a44f1803388fc9fefde65529b81a62853d67"
+    },
+    {
+      "path": "production-branch-policy.json",
+      "bytes": 54,
+      "sha256": "cc07713240cda40f05b17e1a1034ac290aa3fca8700f111b04c9260da2010a43"
+    },
+    {
+      "path": "production-environment.json",
+      "bytes": 154,
+      "sha256": "95ca8ec204a32e5965be5267fed2fec68c228e8dffc8743f96a34202cf3f6682"
+    },
+    {
+      "path": "registry-state.json",
+      "bytes": 96,
+      "sha256": "7161c6d72b4cdf8dc602af6972762132173ede8b968464fa71ef142bd1ed99d8"
+    },
+    {
+      "path": "revision-gate.json",
+      "bytes": 3702,
+      "sha256": "50bfb2d7c144d7c6f8bd6b5c11a2d33f6344168ff52df912354f6af48f114c3a"
+    },
+    {
+      "path": "run-metadata.json",
+      "bytes": 67736,
+      "sha256": "36d7e13273d33c1b5fba95716ff7a149fcf3f05e90a85a182248f54ee9b727fa"
+    },
+    {
+      "path": "run-summary.md",
+      "bytes": 6043,
+      "sha256": "eec2cf3b2e2472d0484ee4e725edfce42f8e5ea6313b74da7a33e95b26d16c16"
+    },
+    {
+      "path": "screenshots/cloud-deployment-results.png",
+      "bytes": 806258,
+      "sha256": "a460d310ea9ee0b0b2b64bf69ebd07dbda6831de6f6c3f3f5d6f0be956105f54"
+    },
+    {
+      "path": "screenshots/cloud-run.png",
+      "bytes": 160272,
+      "sha256": "2bf7dc359d93ee706508f45abbefeccc0dc237a097081426f742dbd4875be3fe"
+    },
+    {
+      "path": "screenshots/shared-ui.png",
+      "bytes": 77844,
+      "sha256": "2aa89c6ceea50820c7d2ebaaf2e556726770485366b0e0716656b8ddebd9536b"
+    },
+    {
+      "path": "screenshots/student-1-endpoint-tests.png",
+      "bytes": 138895,
+      "sha256": "28359583b8a6a794b12e960b4e4ac0396f646c87589317d0420a802505948616"
+    },
+    {
+      "path": "screenshots/student-1-frontend.png",
+      "bytes": 204556,
+      "sha256": "c8ae8dc2d81cac2013378a0a711944f3a7c8564d291e19ea0fe5c1786162f550"
+    },
+    {
+      "path": "screenshots/student-2-frontend.png",
+      "bytes": 173872,
+      "sha256": "d6c032bde00b98893ff2c964a38941cfee300aab424550aaef1e9c9fd949da11"
+    },
+    {
+      "path": "screenshots/student-3-frontend.png",
+      "bytes": 239128,
+      "sha256": "af5be85970dd7734e6ae5ed32c2d9c15c2d716da053c0041320498147706bd2a"
+    },
+    {
+      "path": "screenshots/student-4-frontend.png",
+      "bytes": 184586,
+      "sha256": "7bcd9237d7137469fd01e6733ebea965bd1481a9a050442183f4e0bbd347dec5"
+    },
+    {
+      "path": "screenshots/student-5-frontend.png",
+      "bytes": 218003,
+      "sha256": "4adc54a09aba2d08fd771a37a51b274c429c5369059226f7b1344cd6bae5f30d"
+    },
+    {
+      "path": "student-1-endpoint-tests.md",
+      "bytes": 475,
+      "sha256": "cf0397afb75745b9b4ae078615d8421b962b5673974d26bae863cf40fe838495"
+    },
+    {
+      "path": "student-1-endpoint-tests.xml",
+      "bytes": 1162,
+      "sha256": "d2cb2be6eeb36cecb0fd0ff20a491e063371b75a69be241116fa5074275a4cf1"
+    }
+  ]
+}

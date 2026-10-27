@@ -1,0 +1,248 @@
+{
+  "queried_at_utc": "2026-10-27T09:00:36.375399+00:00",
+  "scope": "rg-tripgenie",
+  "type": "ActualCost",
+  "period": "2026-10-01 through 2026-10-27 UTC",
+  "columns": [
+    {
+      "name": "Cost",
+      "type": "Number"
+    },
+    {
+      "name": "UsageDate",
+      "type": "Number"
+    },
+    {
+      "name": "ServiceName",
+      "type": "String"
+    },
+    {
+      "name": "Currency",
+      "type": "String"
+    }
+  ],
+  "rows": [
+    [
+      0.0286549431076288,
+      20261019,
+      "Azure Container Apps",
+      "AUD"
+    ],
+    [
+      0.0,
+      20261019,
+      "Bandwidth",
+      "AUD"
+    ],
+    [
+      0.142961526034618,
+      20261019,
+      "Container Registry",
+      "AUD"
+    ],
+    [
+      0.0,
+      20261019,
+      "Log Analytics",
+      "AUD"
+    ],
+    [
+      0.0,
+      20261019,
+      "Storage",
+      "AUD"
+    ],
+    [
+      4.10567989173018,
+      20261020,
+      "Azure Container Apps",
+      "AUD"
+    ],
+    [
+      0.0,
+      20261020,
+      "Bandwidth",
+      "AUD"
+    ],
+    [
+      0.237340740508583,
+      20261020,
+      "Container Registry",
+      "AUD"
+    ],
+    [
+      0.0,
+      20261020,
+      "Storage",
+      "AUD"
+    ],
+    [
+      6.65726618705036,
+      20261021,
+      "Azure Container Apps",
+      "AUD"
+    ],
+    [
+      0.0,
+      20261021,
+      "Bandwidth",
+      "AUD"
+    ],
+    [
+      0.237340740508583,
+      20261021,
+      "Container Registry",
+      "AUD"
+    ],
+    [
+      0.0,
+      20261021,
+      "Storage",
+      "AUD"
+    ],
+    [
+      4.77989600398889,
+      20261022,
+      "Azure Container Apps",
+      "AUD"
+    ],
+    [
+      0.0,
+      20261022,
+      "Bandwidth",
+      "AUD"
+    ],
+    [
+      0.237340740508583,
+      20261022,
+      "Container Registry",
+      "AUD"
+    ],
+    [
+      0.0,
+      20261022,
+      "Storage",
+      "AUD"
+    ],
+    [
+      4.53759099650972,
+      20261023,
+      "Azure Container Apps",
+      "AUD"
+    ],
+    [
+      0.0,
+      20261023,
+      "Bandwidth",
+      "AUD"
+    ],
+    [
+      0.237340740508583,
+      20261023,
+      "Container Registry",
+      "AUD"
+    ],
+    [
+      0.0,
+      20261023,
+      "Storage",
+      "AUD"
+    ],
+    [
+      4.47082840658166,
+      20261024,
+      "Azure Container Apps",
+      "AUD"
+    ],
+    [
+      0.0,
+      20261024,
+      "Bandwidth",
+      "AUD"
+    ],
+    [
+      0.237340740508583,
+      20261024,
+      "Container Registry",
+      "AUD"
+    ],
+    [
+      0.0,
+      20261024,
+      "Storage",
+      "AUD"
+    ],
+    [
+      4.44312842795071,
+      20261025,
+      "Azure Container Apps",
+      "AUD"
+    ],
+    [
+      0.0,
+      20261025,
+      "Bandwidth",
+      "AUD"
+    ],
+    [
+      0.237340740508583,
+      20261025,
+      "Container Registry",
+      "AUD"
+    ],
+    [
+      0.0,
+      20261025,
+      "Storage",
+      "AUD"
+    ],
+    [
+      4.44257853123442,
+      20261026,
+      "Azure Container Apps",
+      "AUD"
+    ],
+    [
+      0.0,
+      20261026,
+      "Bandwidth",
+      "AUD"
+    ],
+    [
+      0.237340740508583,
+      20261026,
+      "Container Registry",
+      "AUD"
+    ],
+    [
+      0.0,
+      20261026,
+      "Storage",
+      "AUD"
+    ],
+    [
+      0.415414203290833,
+      20261027,
+      "Azure Container Apps",
+      "AUD"
+    ],
+    [
+      0.0,
+      20261027,
+      "Bandwidth",
+      "AUD"
+    ],
+    [
+      0.0296675925635729,
+      20261027,
+      "Container Registry",
+      "AUD"
+    ],
+    [
+      0.0,
+      20261027,
+      "Storage",
+      "AUD"
+    ]
+  ]
+}

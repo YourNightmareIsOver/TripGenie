@@ -1,0 +1,62 @@
+[
+  {
+    "app": "shared-ui",
+    "url": "https://shared-ui.lemonrock-5a94d8cd.australiaeast.azurecontainerapps.io",
+    "final_url": "https://shared-ui.lemonrock-5a94d8cd.australiaeast.azurecontainerapps.io/",
+    "http": 200,
+    "title": "TripGenie",
+    "captured_at_utc": "2026-10-27T09:06:33.785536+00:00",
+    "insecure_requests": 0,
+    "screenshot": "screenshots/shared-ui.png"
+  },
+  {
+    "app": "student-1-frontend",
+    "url": "https://student-1-frontend.lemonrock-5a94d8cd.australiaeast.azurecontainerapps.io",
+    "final_url": "https://student-1-frontend.lemonrock-5a94d8cd.australiaeast.azurecontainerapps.io/",
+    "http": 200,
+    "title": "Hobart Weekend Escape \u00b7 TripGenie Student 1",
+    "captured_at_utc": "2026-10-27T09:06:37.933367+00:00",
+    "insecure_requests": 0,
+    "screenshot": "screenshots/student-1-frontend.png"
+  },
+  {
+    "app": "student-2-frontend",
+    "url": "https://student-2-frontend.lemonrock-5a94d8cd.australiaeast.azurecontainerapps.io",
+    "final_url": "https://student-2-frontend.lemonrock-5a94d8cd.australiaeast.azurecontainerapps.io/",
+    "http": 200,
+    "title": "Accommodation \u00b7 TripGenie Student 2",
+    "captured_at_utc": "2026-10-27T09:06:44.813415+00:00",
+    "insecure_requests": 0,
+    "screenshot": "screenshots/student-2-frontend.png"
+  },
+  {
+    "app": "student-3-frontend",
+    "url": "https://student-3-frontend.lemonrock-5a94d8cd.australiaeast.azurecontainerapps.io",
+    "final_url": "https://student-3-frontend.lemonrock-5a94d8cd.australiaeast.azurecontainerapps.io/",
+    "http": 200,
+    "title": "Browse transport \u00b7 TripGenie Student 3",
+    "captured_at_utc": "2026-10-27T09:06:48.988205+00:00",
+    "insecure_requests": 0,
+    "screenshot": "screenshots/student-3-frontend.png"
+  },
+  {
+    "app": "student-4-frontend",
+    "url": "https://student-4-frontend.lemonrock-5a94d8cd.australiaeast.azurecontainerapps.io",
+    "final_url": "https://student-4-frontend.lemonrock-5a94d8cd.australiaeast.azurecontainerapps.io/",
+    "http": 200,
+    "title": "Activities & Attractions \u00b7 TripGenie Student 4",
+    "captured_at_utc": "2026-10-27T09:06:52.077986+00:00",
+    "insecure_requests": 0,
+    "screenshot": "screenshots/student-4-frontend.png"
+  },
+  {
+    "app": "student-5-frontend",
+    "url": "https://student-5-frontend.lemonrock-5a94d8cd.australiaeast.azurecontainerapps.io",
+    "final_url": "https://student-5-frontend.lemonrock-5a94d8cd.australiaeast.azurecontainerapps.io/",
+    "http": 200,
+    "title": "Budgets \u00b7 TripGenie Student 5",
+    "captured_at_utc": "2026-10-27T09:06:54.999034+00:00",
+    "insecure_requests": 0,
+    "screenshot": "screenshots/student-5-frontend.png"
+  }
+]

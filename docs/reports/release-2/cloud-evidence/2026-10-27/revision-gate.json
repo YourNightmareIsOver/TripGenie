@@ -1,0 +1,92 @@
+[
+  {
+    "app": "shared-backend",
+    "ready_revision": "shared-backend--0000014",
+    "image": "tripgenie0e70b80e.azurecr.io/tripgenie-shared-backend:7bcedc9860cabbf4f1ab378c368102c36a1c9be2"
+  },
+  {
+    "app": "shared-database",
+    "ready_revision": "shared-database--0000011",
+    "image": "tripgenie0e70b80e.azurecr.io/tripgenie-shared-database:7bcedc9860cabbf4f1ab378c368102c36a1c9be2"
+  },
+  {
+    "app": "shared-ui",
+    "ready_revision": "shared-ui--0000012",
+    "image": "tripgenie0e70b80e.azurecr.io/tripgenie-shared-ui:7bcedc9860cabbf4f1ab378c368102c36a1c9be2"
+  },
+  {
+    "app": "student-1-backend",
+    "ready_revision": "student-1-backend--0000014",
+    "image": "tripgenie0e70b80e.azurecr.io/tripgenie-student-1-backend:7bcedc9860cabbf4f1ab378c368102c36a1c9be2"
+  },
+  {
+    "app": "student-1-database",
+    "ready_revision": "student-1-database--0000012",
+    "image": "tripgenie0e70b80e.azurecr.io/tripgenie-student-1-database:7bcedc9860cabbf4f1ab378c368102c36a1c9be2"
+  },
+  {
+    "app": "student-1-frontend",
+    "ready_revision": "student-1-frontend--0000013",
+    "image": "tripgenie0e70b80e.azurecr.io/tripgenie-student-1-frontend:7bcedc9860cabbf4f1ab378c368102c36a1c9be2"
+  },
+  {
+    "app": "student-2-backend",
+    "ready_revision": "student-2-backend--0000014",
+    "image": "tripgenie0e70b80e.azurecr.io/tripgenie-student-2-backend:7bcedc9860cabbf4f1ab378c368102c36a1c9be2"
+  },
+  {
+    "app": "student-2-database",
+    "ready_revision": "student-2-database--0000014",
+    "image": "tripgenie0e70b80e.azurecr.io/tripgenie-student-2-database:7bcedc9860cabbf4f1ab378c368102c36a1c9be2"
+  },
+  {
+    "app": "student-2-frontend",
+    "ready_revision": "student-2-frontend--0000012",
+    "image": "tripgenie0e70b80e.azurecr.io/tripgenie-student-2-frontend:7bcedc9860cabbf4f1ab378c368102c36a1c9be2"
+  },
+  {
+    "app": "student-3-backend",
+    "ready_revision": "student-3-backend--0000014",
+    "image": "tripgenie0e70b80e.azurecr.io/tripgenie-student-3-backend:7bcedc9860cabbf4f1ab378c368102c36a1c9be2"
+  },
+  {
+    "app": "student-3-database",
+    "ready_revision": "student-3-database--0000014",
+    "image": "tripgenie0e70b80e.azurecr.io/tripgenie-student-3-database:7bcedc9860cabbf4f1ab378c368102c36a1c9be2"
+  },
+  {
+    "app": "student-3-frontend",
+    "ready_revision": "student-3-frontend--0000013",
+    "image": "tripgenie0e70b80e.azurecr.io/tripgenie-student-3-frontend:7bcedc9860cabbf4f1ab378c368102c36a1c9be2"
+  },
+  {
+    "app": "student-4-backend",
+    "ready_revision": "student-4-backend--0000013",
+    "image": "tripgenie0e70b80e.azurecr.io/tripgenie-student-4-backend:7bcedc9860cabbf4f1ab378c368102c36a1c9be2"
+  },
+  {
+    "app": "student-4-database",
+    "ready_revision": "student-4-database--0000012",
+    "image": "tripgenie0e70b80e.azurecr.io/tripgenie-student-4-database:7bcedc9860cabbf4f1ab378c368102c36a1c9be2"
+  },
+  {
+    "app": "student-4-frontend",
+    "ready_revision": "student-4-frontend--0000011",
+    "image": "tripgenie0e70b80e.azurecr.io/tripgenie-student-4-frontend:7bcedc9860cabbf4f1ab378c368102c36a1c9be2"
+  },
+  {
+    "app": "student-5-backend",
+    "ready_revision": "student-5-backend--0000014",
+    "image": "tripgenie0e70b80e.azurecr.io/tripgenie-student-5-backend:7bcedc9860cabbf4f1ab378c368102c36a1c9be2"
+  },
+  {
+    "app": "student-5-database",
+    "ready_revision": "student-5-database--0000012",
+    "image": "tripgenie0e70b80e.azurecr.io/tripgenie-student-5-database:7bcedc9860cabbf4f1ab378c368102c36a1c9be2"
+  },
+  {
+    "app": "student-5-frontend",
+    "ready_revision": "student-5-frontend--0000012",
+    "image": "tripgenie0e70b80e.azurecr.io/tripgenie-student-5-frontend:7bcedc9860cabbf4f1ab378c368102c36a1c9be2"
+  }
+]
