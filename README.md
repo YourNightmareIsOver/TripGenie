@@ -116,25 +116,27 @@ TripGenie/
 │       ├── student-1-ci.yml … student-5-ci.yml
 │       ├── shared-ci.yml
 │       ├── ai-mode-ci.yml
+│       ├── multi-agent-ci.yml
 │       ├── non-functional-ci.yml
 │       ├── workflow-policy-ci.yml
 │       ├── graphify-update.yml
 │       └── cloud-deployment.yml
-├── AGENTS.md               # repository-wide agent and contributor rules
+├── .pre-commit-config.yaml
+├── AGENTS.md
 ├── README.md
 ├── .gitignore
-├── ruff.toml               # shared lint and format policy
-├── docker-compose.yml      # containerised feature services only
+├── ruff.toml
+├── docker-compose.yml
 ├── docs/
 │   ├── architecture/
-│   │   └── decisions/      # architecture decision records
+│   │   └── decisions/
 │   ├── designs/
 │   └── reports/
 │       ├── release-0/
 │       ├── release-1/
 │       └── release-2/
-├── graphify-out/           # generated knowledge graph; do not hand-edit
-├── shared/                 # country, city and currency reference data, landing page
+├── graphify-out/
+├── shared/
 │   ├── shared-service.md
 │   ├── pyproject.toml
 │   ├── backend/
@@ -143,11 +145,13 @@ TripGenie/
 │   ├── tests/
 │   ├── frontend/
 │   │   ├── Dockerfile
+│   │   ├── default.conf.template
 │   │   ├── index.html
 │   │   └── theme.css
 │   └── configuration/
-│       └── .env.example
-├── student-1/              # same layout for student-2 … student-5
+│       ├── .env.example
+│       └── .env.cloud
+├── student-1/
 │   ├── AGENTS.md
 │   ├── pyproject.toml
 │   ├── frontend/
@@ -158,19 +162,21 @@ TripGenie/
 ├── student-3/
 ├── student-4/
 ├── student-5/
-├── ai-services/            # host-run, never Compose services
-│   ├── ai-mode/            # the only service that talks to Ollama
-│   ├── mcp-server/         # shared MCP tools over public feature APIs
-│   ├── rag-server/         # shared retrieval and grounded responses
-│   ├── agentic-loop/       # local validation harness, incl. MCP and RAG modes
-│   └── multi-agent-server/ # Release 2 Planner → Worker → Reviewer → human review (:8013)
+├── ai-services/
+│   ├── ai-mode/
+│   ├── mcp-server/
+│   ├── rag-server/
+│   ├── agentic-loop/
+│   └── multi-agent-server/
 ├── scripts/
-│   ├── run-app.sh          # starts Compose plus the host AI services
+│   ├── run-app.sh
+│   ├── security/
 │   ├── ci/
 │   ├── test/
 │   └── deploy/
+│       └── azure/
 └── tests/
-    └── ci/                 # tests for shared CI scripts
+    └── ci/
 ```
 
 Students 1–3 build from a single `Dockerfile` in their slice root. Students 4
