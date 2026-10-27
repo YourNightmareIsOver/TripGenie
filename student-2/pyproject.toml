@@ -41,7 +41,7 @@ frontend_service = [
 ]
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = ["tests/database", "tests/backend", "tests/frontend", "tests/e2e"]
 addopts = "-q"
 filterwarnings = [
     'ignore:Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead\.',
