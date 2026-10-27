@@ -1,0 +1,16 @@
+{
+  "appLogsConfiguration": {
+    "destination": null,
+    "logAnalyticsConfiguration": null
+  },
+  "defaultDomain": "lemonrock-5a94d8cd.australiaeast.azurecontainerapps.io",
+  "location": "Australia East",
+  "name": "tripgenie-env",
+  "workloadProfiles": [
+    {
+      "enableFips": false,
+      "name": "Consumption",
+      "workloadProfileType": "Consumption"
+    }
+  ]
+}
