@@ -24,7 +24,7 @@ Assistant co-authors remain credited in the linked commits.
 
 ## Original commits
 
-| Committed (UTC) | Commit | PR | Kind | Commit subject |
+| Commit date (UTC) | Commit | PR | Kind | Commit subject |
 | --- | --- | --- | --- | --- |
 | 2026-10-19 09:24:26 | [`597eeff`](https://github.com/YourNightmareIsOver/TripGenie/commit/597eeff2d53d1e0c90d2a056a1c5ab3cada89244) | [#179](https://github.com/YourNightmareIsOver/TripGenie/pull/179) | Contribution | Release 2: Azure Container Apps deployment (Bicep, scripts, cloud-deployment.yml) |
 | 2026-10-19 09:26:51 | [`45c0b2b`](https://github.com/YourNightmareIsOver/TripGenie/commit/45c0b2bbc43e3a8dd238d2faef2f21e0a3fab6e5) | [#180](https://github.com/YourNightmareIsOver/TripGenie/pull/180) | Contribution | Release 2: make frontends cloud-ready and add the AI-off cloud profile (#167) |
