@@ -104,7 +104,8 @@ jobs:
             student-4/database/student4_database_service \
             student-4/tests/backend \
             student-4/tests/database \
-            student-4/tests/e2e
+            student-4/tests/e2e \
+            student-4/tests/endpoint
       - name: Run database tests
         run: pytest student-4/tests -q
       - name: Build backend image
@@ -197,11 +198,60 @@ jobs:
             -d '{"question":"Plan outdoor activities"}' \
             http://127.0.0.1:18008/activity/planner/runs \
             | python -c "import json, sys; assert 'disabled' in json.load(sys.stdin)['detail']"
+      # Release 2 post-commit endpoint tests over HTTP against the slice
+      # started above: create/read an activity and search activities with
+      # QUERY /activity. Activities store shared location ids, so the shared
+      # reference service is started for these tests. The backend is published
+      # on host loopback 18008.
+      - name: Start the shared reference service for endpoint tests
+        run: |
+          docker compose up -d --wait --no-deps \
+            shared-database shared-backend
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Student 4 endpoint test dependencies
+        run: python -m pip install -e "./student-4[dev]"
+      - name: Post-commit endpoint tests
+        working-directory: student-4
+        env:
+          STUDENT4_ENDPOINT_BASE_URL: http://127.0.0.1:18008
+        run: python -m pytest tests/endpoint --junitxml=student-4-endpoint-tests.xml -v
+      - name: Endpoint test summary
+        if: always()
+        working-directory: student-4
+        run: |
+          python - <<'EOF' | tee student-4-endpoint-tests.md >> "$GITHUB_STEP_SUMMARY"
+          import os
+          import xml.etree.ElementTree as ET
+          print("## Student 4 post-commit endpoint tests\n")
+          if not os.path.exists("student-4-endpoint-tests.xml"):
+              print("The endpoint tests did not run.")
+              raise SystemExit
+          print("| Test | Result |\n| --- | --- |")
+          for case in ET.parse("student-4-endpoint-tests.xml").iter("testcase"):
+              outcome = next(
+                  (child.tag for child in case if child.tag in {"failure", "error", "skipped"}),
+                  "passed",
+              )
+              mark = "PASS" if outcome == "passed" else outcome.upper()
+              print(f"| `{case.get('name')}` | {mark} |")
+          EOF
+      - name: Upload endpoint test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: student-4-endpoint-test-evidence
+          path: |
+            student-4/student-4-endpoint-tests.xml
+            student-4/student-4-endpoint-tests.md
       - name: Compose logs on failure
         if: failure()
         run: |
           docker compose logs --no-color \
-            student-4-database student-4-backend student-4-frontend
+            student-4-database student-4-backend student-4-frontend \
+            shared-database shared-backend
       - name: Tear down
         if: always()
         run: docker compose down -v
