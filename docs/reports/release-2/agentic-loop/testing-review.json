@@ -1,13 +1,8 @@
 {
   "mode": "testing",
-  "generated_at": "2026-10-28T09:55:16Z",
+  "generated_at": "2026-10-28T10:25:47Z",
   "human_decision": "Deferred (non-interactive run)",
-  "failed": [
-    "Pre-commit security / student-3 pre-commit security report",
-    "Pre-commit security / student-4 pre-commit security report",
-    "Post-commit CI/CD endpoints / student-2 post-commit testing report",
-    "Post-commit CI/CD endpoints / student-3 post-commit testing report"
-  ],
+  "failed": [],
   "checks": [
     {
       "check": "Pre-commit security / pre-commit hook runs the security scan",
@@ -27,11 +22,11 @@
     },
     {
       "check": "Pre-commit security / student-3 pre-commit security report",
-      "outcome": "FAIL: no student-3-pre-commit-security-report.md or student-3-pre-commit-security-scan.json in docs/reports/release-2"
+      "outcome": "OK: student-3-pre-commit-security-report.md covers ruff, detect-secrets, pip-audit"
     },
     {
       "check": "Pre-commit security / student-4 pre-commit security report",
-      "outcome": "FAIL: no student-4-pre-commit-security-report.md or student-4-pre-commit-security-scan.json in docs/reports/release-2"
+      "outcome": "OK: student-4-pre-commit-security-report.md covers ruff, detect-secrets, pip-audit"
     },
     {
       "check": "Pre-commit security / student-5 pre-commit security report",
@@ -43,11 +38,11 @@
     },
     {
       "check": "Post-commit CI/CD endpoints / student-2 post-commit testing report",
-      "outcome": "FAIL: no student-2-post-commit-testing-report.md in docs/reports/release-2"
+      "outcome": "OK: student-2-post-commit-testing-report.md"
     },
     {
       "check": "Post-commit CI/CD endpoints / student-3 post-commit testing report",
-      "outcome": "FAIL: no student-3-post-commit-testing-report.md in docs/reports/release-2"
+      "outcome": "OK: student-3-post-commit-testing-report.md"
     },
     {
       "check": "Post-commit CI/CD endpoints / student-4 post-commit testing report",
