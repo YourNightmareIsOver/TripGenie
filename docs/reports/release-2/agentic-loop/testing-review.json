@@ -1,7 +1,7 @@
 {
   "mode": "testing",
-  "generated_at": "2026-10-28T10:25:47Z",
-  "human_decision": "Deferred (non-interactive run)",
+  "generated_at": "2026-10-28T11:13:04Z",
+  "human_decision": "Accept",
   "failed": [],
   "checks": [
     {
