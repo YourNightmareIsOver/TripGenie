@@ -1,15 +1,12 @@
 {
   "mode": "testing",
-  "generated_at": "2026-10-26T13:51:23Z",
+  "generated_at": "2026-10-28T09:55:16Z",
   "human_decision": "Deferred (non-interactive run)",
   "failed": [
     "Pre-commit security / student-3 pre-commit security report",
     "Pre-commit security / student-4 pre-commit security report",
     "Post-commit CI/CD endpoints / student-2 post-commit testing report",
-    "Post-commit CI/CD endpoints / student-3 post-commit testing report",
-    "Post-commit CI/CD endpoints / student-4 post-commit testing report",
-    "Post-commit CI/CD endpoints / student-2 post-commit endpoint tests",
-    "Post-commit CI/CD endpoints / student-4 post-commit endpoint tests"
+    "Post-commit CI/CD endpoints / student-3 post-commit testing report"
   ],
   "checks": [
     {
@@ -54,7 +51,7 @@
     },
     {
       "check": "Post-commit CI/CD endpoints / student-4 post-commit testing report",
-      "outcome": "FAIL: no student-4-post-commit-testing-report.md in docs/reports/release-2"
+      "outcome": "OK: student-4-post-commit-testing-report.md"
     },
     {
       "check": "Post-commit CI/CD endpoints / student-5 post-commit testing report",
@@ -62,23 +59,23 @@
     },
     {
       "check": "Post-commit CI/CD endpoints / student-1 post-commit endpoint tests",
-      "outcome": "OK: 7 test(s), 0 failed, 0 errors, 0 skipped; run 39872261759 at 4ed8621 on main"
+      "outcome": "OK: 7 test(s), 0 failed, 0 errors, 0 skipped; run 40476907963 at 7bcedc9 on main"
     },
     {
       "check": "Post-commit CI/CD endpoints / student-2 post-commit endpoint tests",
-      "outcome": "FAIL: run 39872261958 at 4ed8621 on main (success) has no endpoint-test evidence artifact"
+      "outcome": "OK: 7 test(s), 0 failed, 0 errors, 0 skipped; run 40483973852 at b84d200 on main"
     },
     {
       "check": "Post-commit CI/CD endpoints / student-3 post-commit endpoint tests",
-      "outcome": "OK: 11 test(s), 0 failed, 0 errors, 0 skipped; run 39872261763 at 4ed8621 on main"
+      "outcome": "OK: 11 test(s), 0 failed, 0 errors, 0 skipped; run 40476908116 at 7bcedc9 on main"
     },
     {
       "check": "Post-commit CI/CD endpoints / student-4 post-commit endpoint tests",
-      "outcome": "FAIL: run 39872261825 at 4ed8621 on main (success) has no endpoint-test evidence artifact"
+      "outcome": "OK: 6 test(s), 0 failed, 0 errors, 0 skipped; run 40645907239 at 2200014 on main"
     },
     {
       "check": "Post-commit CI/CD endpoints / student-5 post-commit endpoint tests",
-      "outcome": "OK: 13 test(s), 0 failed, 0 errors, 0 skipped; run 39872262024 at 4ed8621 on main"
+      "outcome": "OK: 13 test(s), 0 failed, 0 errors, 0 skipped; run 40476907907 at 7bcedc9 on main"
     }
   ]
 }
