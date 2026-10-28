@@ -7,14 +7,14 @@ touches `student-4/**`, the workflow itself or `docker-compose.yml` (PR #205).
 
 | | |
 | --- | --- |
-| Run | [Student 4 CI, run 40471375775](https://github.com/YourNightmareIsOver/TripGenie/actions/runs/40471375775/job/122079025996) |
-| Event | `push` to `Student4/AddPostCommitTesting` |
-| Commit | `c522430f69340b18e2bb0d8e13080e7e7c1afd3b` |
+| Run | [Student 4 CI, run 40645907239](https://github.com/YourNightmareIsOver/TripGenie/actions/runs/40645907239/job/122674542044) |
+| Event | `push` to `main` (merge of PR #205) |
+| Commit | `220001452e2018f73157c1733c06b102ca1057a5` |
 | Job | `Validate Student 4 Compose Integration`: success |
 | Command | `python -m pytest tests/endpoint --junitxml=student-4-endpoint-tests.xml -v` |
 | Target | `http://127.0.0.1:18008` (the Compose backend) |
 | Artifact | `student-4-endpoint-test-evidence` (JUnit XML and Markdown summary) |
-| Result | **6 passed, 0 failed, 0 errors, 0 skipped** in 0.24s |
+| Result | **6 passed, 0 failed, 0 errors, 0 skipped** in 0.26s |
 
 ## Endpoints under test and why
 
@@ -80,7 +80,7 @@ From the uploaded `student-4-endpoint-tests.md`:
 | `test_a_search_outside_the_filters_excludes_the_activity` | PASS |
 | `test_a_search_with_an_unsupported_category_is_rejected` | PASS |
 
-The same tests also passed in the PR's `pull_request` run
+The same tests also passed before the merge, in the PR's `pull_request` run
 ([run 40471398100](https://github.com/YourNightmareIsOver/TripGenie/actions/runs/40471398100)).
 
 ## Running locally
